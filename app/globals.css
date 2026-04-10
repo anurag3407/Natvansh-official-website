@@ -1,26 +1,183 @@
 @import "tailwindcss";
+@import "swiper/css";
+@import "swiper/css/effect-coverflow";
+@import "swiper/css/pagination";
+@import "swiper/css/navigation";
+
+/* ================================================
+   NATVANSH DESIGN SYSTEM
+   Drama & Film Club · NIT Patna
+   Grunge "Mood Indigo" Theme
+   ================================================ */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Grunge Core Colors */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #000000;
+  --bg-purple: #1e0b2d;
+  --bg-red: #8B0000;
+  
+  --text-primary: #F3F4F6;
+  --text-secondary: #D1D5DB;
+  --text-muted: #9CA3AF;
+  
+  /* Vibrant Accents */
+  --neon-yellow: #FFFF00;
+  --neon-green: #39FF14;
+  --neon-pink: #FF007F;
+  --neon-orange: #FF4500;
+  
+  --border-color: rgba(255, 255, 255, 0.15);
+  
+  --bg-image-red: url('/images/bg_grunge_red.png');
+  --bg-image-purple: url('/images/bg_grunge_purple.png');
+  --bg-image-dark: url('/images/bg_dark_texture.png');
+  
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --color-neon-yellow: var(--neon-yellow);
+  --color-neon-green: var(--neon-green);
+  --color-neon-pink: var(--neon-pink);
+  --color-neon-orange: var(--neon-orange);
+  
+  --font-inter: var(--font-inter);
+  --font-anton: var(--font-anton);
+  --font-bebas: var(--font-bebas-neue);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* --- Global Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
 }
+
+::selection {
+  background: var(--neon-pink);
+  color: #fff;
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neon-orange);
+}
+
+/* --- Typography Utilities --- */
+.font-anton { font-family: var(--font-anton), sans-serif; letter-spacing: 0.05em; }
+.font-bebas { font-family: var(--font-bebas-neue), sans-serif; letter-spacing: 0.05em; }
+
+.text-stroke-black {
+  -webkit-text-stroke: 1.5px black;
+}
+.text-stroke-white {
+  -webkit-text-stroke: 1.5px white;
+}
+
+/* --- Background Utilities --- */
+.bg-grunge-red {
+  background-image: var(--bg-image-red);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.bg-grunge-purple {
+  background-image: var(--bg-image-purple);
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-grunge-dark {
+  background-image: var(--bg-image-dark);
+  background-size: cover;
+  background-position: center;
+}
+
+.halftone-overlay {
+  position: relative;
+}
+.halftone-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 20%, #000 20%, #000 80%, transparent 80%, transparent) 0 0 / 4px 4px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* --- Blocky Cards & Buttons --- */
+.grunge-card {
+  background-color: var(--bg-secondary);
+  border: 3px solid #111;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 1);
+  transition: all 0.2s ease-in-out;
+}
+.grunge-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px rgba(0, 0, 0, 1), 0 0 15px rgba(255, 255, 0, 0.4);
+}
+
+.grunge-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  background-color: var(--neon-yellow);
+  color: black;
+  font-family: var(--font-anton), sans-serif;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  border: 4px solid black;
+  box-shadow: 6px 6px 0px black;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+.grunge-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0px black;
+  background-color: var(--neon-green);
+}
+.grunge-btn:active {
+  transform: translate(6px, 6px);
+  box-shadow: 0px 0px 0px black;
+}
+
+/* --- Sections --- */
+.section-padding {
+  padding: 6rem 1.5rem;
+}
+@media (min-width: 768px) { .section-padding { padding: 8rem 3rem; } }
+@media (min-width: 1280px) { .section-padding { padding: 10rem 4rem; } }
+
+/* --- Admin Panel (Kept basic) --- */
+.admin-sidebar { background: var(--bg-secondary); border-right: 1px solid var(--border-color); }
+.admin-card { background: #111; border: 1px solid var(--border-color); border-radius: 4px; padding: 1.5rem; transition: all 0.3s ease; }
+.admin-input { width: 100%; padding: 0.75rem 1rem; background: var(--bg-primary); border: 2px solid #333; color: var(--text-primary); font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
+.admin-input:focus { border-color: var(--neon-pink); }
+.admin-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1.25rem; font-weight: 600; font-size: 0.875rem; transition: all 0.2s ease; border: 2px solid #fff; cursor: pointer; }
+.admin-btn-primary { background: var(--neon-pink); color: white; border-color: var(--neon-pink); }
+.admin-btn-ghost { background: transparent; color: var(--text-secondary); border-color: #333; }
+
