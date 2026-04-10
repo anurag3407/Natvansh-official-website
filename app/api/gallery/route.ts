@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
-import Event from "@/lib/models/Event";
+import GalleryImage from "@/lib/models/GalleryImage";
 
 export async function GET() {
   try {
     await dbConnect();
-    const events = await Event.find().sort({ createdAt: -1 });
-    return NextResponse.json(events);
+    const images = await GalleryImage.find().sort({ order: 1, createdAt: -1 });
+    return NextResponse.json(images);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch events" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch gallery" }, { status: 500 });
   }
 }
 
@@ -20,9 +20,9 @@ export async function POST(request: NextRequest) {
 
     await dbConnect();
     const body = await request.json();
-    const event = await Event.create(body);
-    return NextResponse.json(event, { status: 201 });
+    const image = await GalleryImage.create(body);
+    return NextResponse.json(image, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to create event" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to create gallery image" }, { status: 500 });
   }
 }

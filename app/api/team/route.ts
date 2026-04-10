@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-// import { auth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import TeamMember from "@/lib/models/TeamMember";
 
@@ -15,10 +15,8 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    // const { userId } = await auth();
-    // if (!userId) {
-    //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    // }
+    const { userId } = await auth();
+    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     await dbConnect();
     const body = await request.json();

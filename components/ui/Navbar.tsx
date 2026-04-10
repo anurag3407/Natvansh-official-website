@@ -10,7 +10,7 @@ const navLinks = [
   { href: "/", label: "HOME" },
   { href: "/events", label: "EVENTS" },
   { href: "/team", label: "TEAM" },
-  { href: "/developers", label: "DEVELOPERS" },
+  { href: "/gallery", label: "GALLERY" },
 ];
 
 export default function Navbar() {
@@ -31,23 +31,21 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-4 border-black ${
-          isScrolled
-            ? "bg-black py-4 shadow-[0_5px_0_0_#FFF]"
-            : "bg-black py-6"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-4 border-black bg-[url('/images/nav_footer_bg.png')] bg-cover bg-center h-[10vh] md:h-[12vh] flex items-center ${isScrolled
+          ? "shadow-[0_5px_0_0_#FFF]"
+          : ""
+          }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <img 
-              src="/images/logo.png" 
-              alt="Natvansh Logo" 
-              className="w-12 h-12 md:w-14 md:h-14 object-contain group-hover:rotate-[15deg] group-hover:scale-110 transition-all duration-300 drop-shadow-[2px_2px_0px_#FF007F]" 
+        <div className="absolute inset-0 bg-black/60 halftone-overlay opacity-80 pointer-events-none"></div>
+        <div className="relative w-full h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between z-10">
+
+          {/* Pop-out Logo */}
+          <Link href="/" className="relative flex items-center shrink-0 w-[120px] md:w-[200px] h-full z-50">
+            <img
+              src="/images/logo.png"
+              alt="Natvansh Logo"
+              className="absolute top-1/2 -translate-y-[49%] left-0 h-[140px] md:h-[240px] w-auto object-contain drop-shadow-[8px_8px_0_rgba(0,0,0,0.4)]"
             />
-            <h1 className="text-3xl md:text-4xl font-anton text-white tracking-widest uppercase transition-transform group-hover:-rotate-2 group-hover:text-[var(--neon-yellow)] drop-shadow-[2px_2px_0px_#000]">
-              <span className="text-[var(--neon-pink)] group-hover:text-white transition-colors duration-300">NAT</span>VANSH
-            </h1>
           </Link>
 
           {/* Desktop Nav */}
@@ -58,11 +56,10 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-5 py-2 font-anton text-lg uppercase tracking-wide transition-all duration-300 transform hover:-translate-y-1 hover:rotate-2 ${
-                    isActive
-                      ? "bg-[var(--neon-yellow)] text-black border-2 border-black shadow-[4px_4px_0_#FFF]"
-                      : "text-white bg-black border-2 border-transparent hover:border-[var(--neon-green)] hover:text-[var(--neon-green)] hover:shadow-[4px_4px_0_var(--neon-green)]"
-                  }`}
+                  className={`px-5 py-2 font-anton text-lg uppercase tracking-wide transition-all duration-300 transform hover:-translate-y-1 hover:rotate-2 ${isActive
+                    ? "bg-[var(--neon-yellow)] text-black border-2 border-black shadow-[4px_4px_0_#FFF]"
+                    : "text-white bg-black border-2 border-transparent hover:border-[var(--neon-green)] hover:text-[var(--neon-green)] hover:shadow-[4px_4px_0_var(--neon-green)]"
+                    }`}
                 >
                   {link.label}
                 </Link>
@@ -104,7 +101,7 @@ export default function Navbar() {
               <div className="flex flex-col h-full p-8 relative">
                 {/* Halftone BG inside menu */}
                 <div className="absolute inset-0 halftone-overlay opacity-50 z-0"></div>
-                
+
                 <div className="flex justify-between items-center mb-10 relative z-10">
                   <span className="text-2xl font-anton text-[var(--neon-magenta)] uppercase text-white">NATVANSH</span>
                   <button
@@ -115,7 +112,7 @@ export default function Navbar() {
                     <X size={32} />
                   </button>
                 </div>
-                
+
                 <div className="flex flex-col gap-4 relative z-10">
                   {navLinks.map((link, i) => {
                     const isActive = pathname === link.href;
@@ -128,11 +125,10 @@ export default function Navbar() {
                       >
                         <Link
                           href={link.href}
-                          className={`block px-6 py-4 border-2 font-anton text-xl tracking-wide uppercase transition-all ${
-                            isActive
-                              ? "bg-[var(--neon-yellow)] border-white text-black"
-                              : "bg-transparent border-transparent text-white hover:border-white"
-                          }`}
+                          className={`block px-6 py-4 border-2 font-anton text-xl tracking-wide uppercase transition-all ${isActive
+                            ? "bg-[var(--neon-yellow)] border-white text-black"
+                            : "bg-transparent border-transparent text-white hover:border-white"
+                            }`}
                         >
                           {link.label}
                         </Link>

@@ -85,19 +85,27 @@ export default function ProfessorSection() {
             </p>
           </blockquote>
 
-          {/* Professor Info */}
-          <div className="prof-name flex items-center gap-6 mt-10 pt-8" style={{ borderTop: "4px dashed #333" }}>
-            <div className="w-16 h-16 border-2 border-black flex items-center justify-center text-3xl font-anton text-black bg-[var(--neon-pink)] shrink-0 shadow-[4px_4px_0_#000]">
-              P
+          {/* Professor Info & Picture */}
+          <div className="prof-name flex flex-col md:flex-row items-center md:items-start gap-8 mt-10 pt-8" style={{ borderTop: "4px dashed #333" }}>
+            <div className="relative w-40 h-40 shrink-0 transform -rotate-3 hover:rotate-0 transition-transform">
+              <div className="absolute inset-0 bg-[var(--neon-pink)] border-4 border-black shadow-[6px_6px_0_#000] rotate-6"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop" 
+                alt="Prof. Faculty Name" 
+                className="relative z-10 w-full h-full object-cover border-4 border-black shadow-[4px_4px_0_#000] filter contrast-125 grayscale hover:grayscale-0 transition-all duration-500"
+              />
+              {/* Tape */}
+              <div className="absolute top-[-10px] right-[-10px] w-12 h-4 bg-[var(--neon-yellow)] border-2 border-black rotate-12 z-20"></div>
             </div>
-            <div>
-              <p className="font-anton text-2xl tracking-wider text-white uppercase">
+            
+            <div className="flex flex-col justify-center text-center md:text-left h-full mt-2">
+              <p className="font-anton text-3xl tracking-wider text-white uppercase drop-shadow-[2px_2px_0_#000]">
                 Prof. Faculty Name
               </p>
-              <p className="text-lg font-bold text-[var(--text-secondary)] uppercase font-inter mt-1">
+              <p className="text-xl font-bold text-[var(--neon-green)] uppercase font-inter mt-2">
                 Professor In-Charge, Natvansh
               </p>
-              <p className="text-sm font-bold text-[var(--text-muted)] uppercase mt-1">
+              <p className="text-md font-bold text-zinc-400 uppercase mt-2">
                 Department of Humanities & Social Sciences, NIT Patna
               </p>
             </div>

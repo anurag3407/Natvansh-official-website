@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
-import Developer from "@/lib/models/Developer";
+import GalleryImage from "@/lib/models/GalleryImage";
 
 export async function PUT(
   request: NextRequest,
@@ -14,11 +14,11 @@ export async function PUT(
     const { id } = await params;
     await dbConnect();
     const body = await request.json();
-    const developer = await Developer.findByIdAndUpdate(id, body, { new: true });
-    if (!developer) return NextResponse.json({ error: "Developer not found" }, { status: 404 });
-    return NextResponse.json(developer);
+    const image = await GalleryImage.findByIdAndUpdate(id, body, { new: true });
+    if (!image) return NextResponse.json({ error: "Image not found" }, { status: 404 });
+    return NextResponse.json(image);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to update developer" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to update image" }, { status: 500 });
   }
 }
 
@@ -32,10 +32,10 @@ export async function DELETE(
 
     const { id } = await params;
     await dbConnect();
-    const developer = await Developer.findByIdAndDelete(id);
-    if (!developer) return NextResponse.json({ error: "Developer not found" }, { status: 404 });
-    return NextResponse.json({ message: "Developer deleted" });
+    const image = await GalleryImage.findByIdAndDelete(id);
+    if (!image) return NextResponse.json({ error: "Image not found" }, { status: 404 });
+    return NextResponse.json({ message: "Image deleted" });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to delete developer" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to delete image" }, { status: 500 });
   }
 }

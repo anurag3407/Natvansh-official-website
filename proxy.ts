@@ -1,22 +1,23 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// Clerk auth proxy - uncomment when Clerk keys are configured
-// import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-// const isProtectedRoute = createRouteMatcher(["/admin(.*)"]);
-// export default clerkMiddleware(async (auth, req) => {
-//   if (isProtectedRoute(req)) {
-//     await auth.protect();
-//   }
-// });
+const isProtectedRoute = createRouteMatcher(["/admin(.*)"]);
+const isSignInRoute = createRouteMatcher(["/admin/sign-in(.*)"]);
 
-export function proxy(request: NextRequest) {
-  return NextResponse.next();
-}
+export default clerkMiddleware(async (auth, req) => {
+  // Don't protect sign-in page itself
+  if (isSignInRoute(req)) return;
+
+  // Protect all /admin routes
+  if (isProtectedRoute(req)) {
+    await auth.protect();
+  }
+});
 
 export const config = {
   matcher: [
+    // Skip Next.js internals and all static files
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    // Always run for API routes
     "/(api|trpc)(.*)",
   ],
 };

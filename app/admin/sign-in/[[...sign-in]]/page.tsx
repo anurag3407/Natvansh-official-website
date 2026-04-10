@@ -1,24 +1,34 @@
+import { SignIn } from "@clerk/nextjs";
+
 export default function AdminSignInPage() {
   return (
-    <div
-      className="min-h-screen flex items-center justify-center doodle-bg"
-      style={{ background: "var(--bg-primary)" }}
-    >
-      <div className="text-center space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-black bg-[url('/images/bg_grunge_purple.png')] bg-cover">
+      <div className="absolute inset-0 bg-black/70"></div>
+      <div className="relative z-10 text-center space-y-8">
         <div>
-          <h1 className="text-4xl font-bold text-gradient mb-2">नटवंश</h1>
-          <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+          <img src="/images/logo.png" alt="Natvansh" className="w-24 h-24 mx-auto object-contain mb-4" />
+          <h1 className="text-5xl font-anton text-white uppercase tracking-wider drop-shadow-[4px_4px_0_#000]">
+            नटवंश
+          </h1>
+          <p className="text-sm font-inter font-bold text-zinc-400 mt-2 uppercase tracking-widest">
             Admin Access · Drama & Film Club
           </p>
         </div>
-        <div className="admin-card max-w-sm mx-auto p-8 rounded-2xl">
-          <p className="text-sm mb-4" style={{ color: "var(--text-secondary)" }}>
-            Clerk authentication will be enabled once API keys are configured.
-          </p>
-          <p className="text-xs" style={{ color: "var(--text-muted)" }}>
-            Update <code className="px-1 py-0.5 rounded" style={{ background: "var(--bg-glass)" }}>.env.local</code> with your Clerk keys and
-            uncomment the ClerkProvider in <code className="px-1 py-0.5 rounded" style={{ background: "var(--bg-glass)" }}>layout.tsx</code>
-          </p>
+        <div className="flex justify-center">
+          <SignIn
+            appearance={{
+              elements: {
+                rootBox: "mx-auto",
+                card: "bg-zinc-900 border-2 border-zinc-700 shadow-[8px_8px_0_#000]",
+                headerTitle: "text-white font-bold",
+                headerSubtitle: "text-zinc-400",
+                formButtonPrimary: "bg-[#FFFF00] text-black font-bold hover:bg-white border-2 border-black",
+                formFieldInput: "bg-black border-2 border-zinc-700 text-white",
+                formFieldLabel: "text-zinc-400",
+                footerActionLink: "text-[#FF007F]",
+              },
+            }}
+          />
         </div>
       </div>
     </div>

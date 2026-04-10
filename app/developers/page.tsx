@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,31 +15,21 @@ gsap.registerPlugin(ScrollTrigger);
 
 const fallbackImage = "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop";
 
-const developers = [
-  {
-    name: "Developer One",
-    role: "Full-Stack Developer",
-    image: fallbackImage,
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    portfolio: "https://example.com",
-  },
-  {
-    name: "Developer Two",
-    role: "Frontend Developer",
-    image: fallbackImage,
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    portfolio: null,
-  },
-  {
-    name: "Developer Three",
-    role: "UI/UX Designer",
-    image: fallbackImage,
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    portfolio: "https://example.com",
-  },
+interface DevItem {
+  _id?: string;
+  name: string;
+  role: string;
+  image: string;
+  github: string;
+  linkedin: string;
+  portfolio: string;
+  order: number;
+}
+
+const placeholderDevs: DevItem[] = [
+  { name: "Developer One", role: "Full-Stack Developer", image: fallbackImage, github: "https://github.com", linkedin: "https://linkedin.com", portfolio: "https://example.com", order: 0 },
+  { name: "Developer Two", role: "Frontend Developer", image: fallbackImage, github: "https://github.com", linkedin: "https://linkedin.com", portfolio: "", order: 1 },
+  { name: "Developer Three", role: "UI/UX Designer", image: fallbackImage, github: "https://github.com", linkedin: "https://linkedin.com", portfolio: "https://example.com", order: 2 },
 ];
 
 const techStack = [
@@ -53,26 +43,19 @@ const techStack = [
   { name: "TypeScript", color: "#FFF" },
 ];
 
-const DevCard = ({ dev }: { dev: any }) => (
+const DevCard = ({ dev }: { dev: DevItem }) => (
   <div className="bg-[#050505] rounded-[1.5rem] overflow-hidden border-2 border-[var(--neon-purple)] group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(255,0,255,0.4)] flex flex-col h-full mx-auto w-full max-w-[340px]">
-    {/* Doodle Image Area */}
     <div className="relative h-60 w-full bg-[url('/images/card_doodle_bg_alt.png')] bg-cover bg-center overflow-hidden flex items-end justify-center">
       <div className="absolute inset-0 bg-black/40 mix-blend-multiply rounded-t-[1.5rem]"></div>
-      {/* Cutout style subject photo */}
       <img 
-        src={dev.image} 
+        src={dev.image || fallbackImage} 
         alt={dev.name} 
         className="relative z-10 w-full h-[90%] object-cover object-top mask-image-bottom drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] filter contrast-125 saturate-150 grayscale hover:grayscale-0 transition-all duration-500"
       />
-      {/* Code icon */}
-      <div
-        className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center bg-black border-2 border-[var(--neon-pink)] shadow-[2px_2px_0_#FFF] z-20 transform rotate-[10deg]"
-      >
+      <div className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center bg-black border-2 border-[var(--neon-pink)] shadow-[2px_2px_0_#FFF] z-20 transform rotate-[10deg]">
         <Code2 size={24} style={{ color: "var(--neon-pink)" }} />
       </div>
     </div>
-
-    {/* Text & Socials Area */}
     <div className="p-6 flex flex-col flex-1 items-center justify-between text-center gap-6">
       <div>
         <h4 className="font-anton text-3xl text-white tracking-widest uppercase text-stroke-black drop-shadow-[2px_2px_0_#000]">
@@ -82,20 +65,19 @@ const DevCard = ({ dev }: { dev: any }) => (
           {dev.role}
         </p>
       </div>
-
       <div className="flex items-center gap-6 w-full justify-center mt-2">
         {dev.github && (
-          <a href={dev.github} className="w-12 h-12 flex items-center justify-center border-2 border-white text-white hover:bg-[var(--neon-yellow)] hover:text-black hover:border-black shadow-[3px_3px_0_#FFF] hover:shadow-none hover:translate-y-1 hover:translate-x-1 transition-all">
+          <a href={dev.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border-2 border-white text-white hover:bg-[var(--neon-yellow)] hover:text-black hover:border-black shadow-[3px_3px_0_#FFF] hover:shadow-none hover:translate-y-1 hover:translate-x-1 transition-all">
             <IconGithub size={24} />
           </a>
         )}
         {dev.linkedin && (
-          <a href={dev.linkedin} className="w-12 h-12 flex items-center justify-center border-2 border-white text-white hover:bg-[var(--neon-green)] hover:text-black hover:border-black shadow-[3px_3px_0_#FFF] hover:shadow-none hover:translate-y-1 hover:translate-x-1 transition-all">
+          <a href={dev.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border-2 border-white text-white hover:bg-[var(--neon-green)] hover:text-black hover:border-black shadow-[3px_3px_0_#FFF] hover:shadow-none hover:translate-y-1 hover:translate-x-1 transition-all">
             <IconLinkedin size={24} />
           </a>
         )}
         {dev.portfolio && (
-          <a href={dev.portfolio} className="w-12 h-12 flex items-center justify-center border-2 border-white text-white hover:bg-[var(--neon-pink)] hover:text-black hover:border-black shadow-[3px_3px_0_#FFF] hover:shadow-none hover:translate-y-1 hover:translate-x-1 transition-all">
+          <a href={dev.portfolio} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border-2 border-white text-white hover:bg-[var(--neon-pink)] hover:text-black hover:border-black shadow-[3px_3px_0_#FFF] hover:shadow-none hover:translate-y-1 hover:translate-x-1 transition-all">
             <Globe size={24} />
           </a>
         )}
@@ -106,6 +88,22 @@ const DevCard = ({ dev }: { dev: any }) => (
 
 export default function DevelopersPage() {
   const container = useRef<HTMLDivElement>(null);
+  const [developers, setDevelopers] = useState<DevItem[]>(placeholderDevs);
+
+  useEffect(() => {
+    async function fetchDevs() {
+      try {
+        const res = await fetch("/api/developers");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.length > 0) setDevelopers(data);
+        }
+      } catch (e) {
+        console.error("Failed to fetch developers:", e);
+      }
+    }
+    fetchDevs();
+  }, []);
 
   useGSAP(
     () => {
@@ -152,7 +150,6 @@ export default function DevelopersPage() {
                 subtitle="The tech wizards who built this digital stage for Natvansh."
               />
             </div>
-            {/* The Team Doodle Graphic */}
             <div className="flex-1 w-full max-w-md mx-auto hidden lg:block transform rotate-2 hover:rotate-0 transition-transform duration-500">
               <div className="border-4 border-black p-2 bg-[var(--neon-pink)] shadow-[10px_10px_0_#000]">
                 <img src="/images/team_doodle.png" alt="Dev Team Doodle" className="w-full h-auto border-4 border-black filter contrast-125" />
@@ -165,7 +162,7 @@ export default function DevelopersPage() {
         <section className="px-4 sm:px-6 lg:px-8 py-20 bg-grunge-dark halftone-overlay border-b-8 border-black">
           <div className="max-w-5xl mx-auto dev-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
             {developers.map((dev) => (
-              <div key={dev.name} className="dev-card-wrapper">
+              <div key={dev._id || dev.name} className="dev-card-wrapper">
                 <DevCard dev={dev} />
               </div>
             ))}

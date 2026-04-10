@@ -52,48 +52,54 @@ export default function HeroSection() {
   return (
     <section
       ref={container}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-grunge-purple halftone-overlay"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[var(--neon-yellow)] bg-[url('/images/bg_grunge_red.png')] bg-cover bg-center"
     >
+      <div className="absolute inset-0 bg-white/70 halftone-overlay pointer-events-none mix-blend-overlay"></div>
+
       {/* Main Content Wrapper */}
-      <div className="hero-content-wrapper relative z-10 w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center pt-24 pb-12">
+      <div className="hero-content-wrapper relative z-10 w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center pt-[18vh] md:pt-[22vh] pb-8">
 
         {/* Sanskrit Floating Badge */}
-        <div className="hero-badge flex items-center gap-2 px-6 py-2 border-4 border-black bg-[var(--neon-green)] mb-10 shadow-[6px_6px_0px_#000] rotate-[-2deg]">
-          <Sparkles size={16} className="text-black" />
-          <span className="font-anton text-xl tracking-wider text-black uppercase">
+        <div className="hero-badge flex items-center gap-2 px-6 py-2 border-4 border-black bg-[var(--neon-pink)] mb-6 shadow-[6px_6px_0_#000] rotate-[-3deg] hover:rotate-[3deg] transition-transform duration-300">
+          <Sparkles size={20} className="text-black" />
+          <span className="font-anton tracking-widest text-black uppercase text-lg">
             अस्ति कश्चित् विशेषः!
           </span>
-          <Sparkles size={16} className="text-black" />
+          <Sparkles size={20} className="text-black" />
         </div>
 
         {/* Masterpiece Title */}
         <h1
           ref={titleRef}
-          className="text-[15vw] sm:text-[12vw] md:text-[10vw] lg:text-[160px] font-anton leading-none tracking-tight mb-2 text-[var(--neon-yellow)] text-center flex overflow-hidden text-stroke-black drop-shadow-[10px_10px_0px_#000]"
+          className="text-[14vw] sm:text-[12vw] md:text-[10vw] lg:text-[160px] font-anton leading-[0.85] tracking-tight mb-4 flex overflow-visible text-[var(--neon-cyan)] drop-shadow-[12px_12px_0_#000] stroke-black text-stroke-black"
+          style={{ WebkitTextStroke: "3px black", transform: "rotate(-2deg)" }}
         >
           {Array.from("NATVANSH").map((char, i) => (
-            <span key={i} className="hero-char inline-block">
+            <span key={i} className="hero-char inline-block" style={{ transform: i % 2 === 0 ? 'translateY(-8px)' : 'translateY(8px)' }}>
               {char}
             </span>
           ))}
         </h1>
 
-        <h1 className="text-[8vw] sm:text-[6vw] lg:text-[80px] font-anton text-[var(--neon-pink)] uppercase tracking-wider mb-6 text-stroke-black drop-shadow-[6px_6px_0px_#000] rotate-[1deg]">
+        <h1 className="text-[6vw] sm:text-[5vw] lg:text-[55px] font-anton text-[var(--neon-yellow)] uppercase tracking-wider mb-6 text-stroke-black drop-shadow-[6px_6px_0_#000] rotate-[2deg] bg-black px-6 py-1.5 border-4 border-black">
           Drama & Film Club
         </h1>
 
-        <p className="hero-subtitle text-lg sm:text-2xl text-white font-inter font-bold max-w-2xl text-center leading-relaxed mb-12 bg-black px-6 py-4 border-2 border-white shadow-[4px_4px_0_var(--neon-green)]">
-          Where every emotion finds its stage and every story finds its screen.
-          <br />
-          <span className="text-[var(--neon-yellow)] text-xl block mt-2">NIT PATNA</span>
-        </p>
+        <div className="hero-subtitle bg-[var(--neon-green)] border-4 border-black p-5 shadow-[8px_8px_0_var(--neon-pink)] transform -rotate-1 max-w-xl text-center mb-10">
+          <p className="text-lg sm:text-xl text-black font-inter font-black leading-relaxed">
+            Where every emotion finds its stage and every story finds its screen.
+          </p>
+          <span className="text-black bg-white inline-block px-3 py-1 border-2 border-black font-anton tracking-widest text-base mt-3 uppercase shadow-[4px_4px_0_#000] rotate-2">
+            NIT PATNA
+          </span>
+        </div>
 
-        {/* Ultra-modern CTAs */}
-        <div className="flex flex-col sm:flex-row items-center gap-6 mt-8">
-          <a href="/events" className="hero-cta grunge-btn">
+        {/* Ultra-modern CTAs - Retro Style */}
+        <div className="flex flex-col sm:flex-row items-center gap-6 mt-2">
+          <a href="/events" className="hero-cta px-8 py-4 font-anton text-xl text-black bg-[var(--neon-yellow)] border-4 border-black hover:bg-white hover:-translate-y-1 hover:-translate-x-1 transition-transform shadow-[8px_8px_0_#000] rotate-[-2deg] hover:rotate-0">
             EXPLORE THE MAGIC
           </a>
-          <a href="/team" className="hero-cta grunge-btn" style={{ backgroundColor: 'var(--neon-pink)', color: 'white' }}>
+          <a href="/team" className="hero-cta px-8 py-4 font-anton text-xl text-white bg-black border-4 border-black hover:bg-[var(--neon-pink)] hover:text-black hover:-translate-y-1 hover:-translate-x-1 transition-transform shadow-[8px_8px_0_var(--neon-cyan)] rotate-[2deg] hover:rotate-0">
             MEET THE CAST
           </a>
         </div>

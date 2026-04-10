@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,91 +8,103 @@ import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { Calendar, MapPin, Tag, ArrowRight } from "lucide-react";
+import ProfessorSection from "@/components/sections/ProfessorSection";
+import { Calendar, MapPin, ArrowRight } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
+import Link from "next/link";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const categories = ["All", "Drama", "Film", "Workshop", "Competition"];
 
-const placeholderEvents = [
+interface EventItem {
+  _id?: string;
+  id?: string;
+  title: string;
+  description: string;
+  date: string;
+  venue: string;
+  category: string;
+  images: string[];
+  featured: boolean;
+}
+
+const placeholderEvents: EventItem[] = [
   {
     id: "1",
-    title: "Rangmanch — Annual Drama Festival",
-    description: "The flagship annual drama festival featuring theatrical performances, monologue competitions, and workshops.",
-    date: "March 15-17, 2025",
-    venue: "Cultural Complex, NIT Patna",
+    title: "RANGMANCH '25",
+    description: "The flagship annual drama festival of Natvansh featuring theatrical performances, monologue competitions, short film screenings, and workshops. Three days of non-stop creative energy.",
+    date: "MARCH 15-17",
+    venue: "CULTURAL COMPLEX",
     category: "Drama",
-    image: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=600&h=400&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=800&h=500&fit=crop"
+    ],
     featured: true,
   },
   {
     id: "2",
-    title: "Short Film Competition",
+    title: "SHORT FILM COMPETITION",
     description: "Annual short film making competition — 48-hour filmmaking challenge with a surprise theme reveal.",
-    date: "February 20, 2025",
-    venue: "Auditorium, NIT Patna",
+    date: "FEBRUARY 20, 2025",
+    venue: "AUDITORIUM, NIT PATNA",
     category: "Film",
-    image: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=600&h=400&fit=crop",
-    featured: false,
-  },
-  {
-    id: "3",
-    title: "Nukkad Natak — Street Play Day",
-    description: "Bringing socially relevant stories to the streets of NIT Patna campus through powerful street theater.",
-    date: "January 26, 2025",
-    venue: "Main Campus Ground",
-    category: "Drama",
-    image: "https://images.unsplash.com/photo-1507924538820-ede94a04019d?w=600&h=400&fit=crop",
-    featured: false,
-  },
-  {
-    id: "4",
-    title: "Acting Workshop by Alumni",
-    description: "Master class on method acting and improvisation led by Natvansh alumni from the film industry.",
-    date: "December 10, 2024",
-    venue: "Seminar Hall, NIT Patna",
-    category: "Workshop",
-    image: "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?w=600&h=400&fit=crop",
-    featured: false,
-  },
-  {
-    id: "5",
-    title: "Mime & Monologue Night",
-    description: "An evening dedicated to the art of mime and solo performances, exploring silence and solitude on stage.",
-    date: "November 15, 2024",
-    venue: "Open Air Theater",
-    category: "Competition",
-    image: "https://images.unsplash.com/photo-1516307365426-bea591f05011?w=600&h=400&fit=crop",
-    featured: false,
-  },
-  {
-    id: "6",
-    title: "Documentary Screening",
-    description: "Screening of award-winning documentaries followed by panel discussion on independent filmmaking.",
-    date: "October 8, 2024",
-    venue: "Auditorium, NIT Patna",
-    category: "Film",
-    image: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=600&h=400&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&h=500&fit=crop"
+    ],
     featured: false,
   },
 ];
 
 export default function EventsPage() {
   const container = useRef<HTMLDivElement>(null);
+  const [events, setEvents] = useState<EventItem[]>(placeholderEvents);
+
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        const res = await fetch("/api/events");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.length > 0) setEvents(data);
+        }
+      } catch (e) {
+        console.error("Failed to fetch events:", e);
+      }
+    }
+    fetchEvents();
+  }, []);
 
   useGSAP(
     () => {
-      gsap.from(".event-card", {
-        scrollTrigger: {
-          trigger: ".events-grid",
-          start: "top 85%",
-        },
-        opacity: 0,
-        y: 50,
-        scale: 0.95,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
+      document.querySelectorAll(".event-alternating-row").forEach((row) => {
+        gsap.from(row.querySelectorAll(".event-anim-left"), {
+          scrollTrigger: {
+            trigger: row,
+            start: "top 80%",
+          },
+          opacity: 0,
+          x: -50,
+          duration: 0.8,
+          ease: "power3.out",
+        });
+
+        gsap.from(row.querySelectorAll(".event-anim-right"), {
+          scrollTrigger: {
+            trigger: row,
+            start: "top 80%",
+          },
+          opacity: 0,
+          x: 50,
+          duration: 0.8,
+          ease: "power3.out",
+        });
       });
     },
     { scope: container }
@@ -137,69 +149,95 @@ export default function EventsPage() {
           </div>
         </section>
 
-        {/* Events Grid */}
-        <section className="px-4 sm:px-6 lg:px-8 py-20 bg-grunge-dark halftone-overlay relative">
-          <div className="max-w-6xl mx-auto events-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
-            {placeholderEvents.map((event) => (
-              <div
-                key={event.id}
-                className="event-card bg-[#0a0a0a] border-4 border-black p-4 flex flex-col group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[10px_10px_0_var(--neon-pink)]"
-              >
-                {/* Image */}
-                <div className="relative aspect-[16/10] overflow-hidden border-2 border-zinc-800">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500"
-                  />
-                  {event.featured && (
-                    <span
-                      className="absolute top-3 right-3 px-4 py-1 text-sm font-anton uppercase text-black bg-[var(--neon-yellow)] border-2 border-black shadow-[2px_2px_0_#000]"
+        {/* Alternating Events Layout */}
+        <section className="px-4 sm:px-6 lg:px-8 py-20 bg-[url('/images/bg_grunge_purple.png')] bg-cover halftone-overlay relative">
+          <div className="max-w-7xl mx-auto relative z-10 space-y-24">
+            {events.map((event, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <div key={event._id || event.id || index} className="event-alternating-row grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                  
+                  {/* Image Carousel */}
+                  <div className={`p-4 bg-black border-4 border-black shadow-[8px_8px_0px_#FFFF00] rotate-1 ${isEven ? 'lg:order-1 event-anim-left' : 'lg:order-2 event-anim-right'}`}>
+                    <Swiper
+                      effect="coverflow"
+                      grabCursor
+                      centeredSlides
+                      slidesPerView={1}
+                      coverflowEffect={{ rotate: 0, stretch: 0, depth: 100, modifier: 1, slideShadows: false }}
+                      pagination={{ clickable: true }}
+                      autoplay={{ delay: 3500, disableOnInteraction: false }}
+                      modules={[EffectCoverflow, Pagination, Autoplay]}
+                      className="overflow-hidden bg-zinc-900"
                     >
-                      ★ Featured
-                    </span>
-                  )}
-                  <span
-                    className="absolute bottom-3 left-3 px-4 py-1 text-xs font-bold uppercase text-white bg-[var(--neon-purple)] tracking-wider border-2 border-transparent group-hover:border-white transition-all transform -rotate-2"
-                  >
-                    {event.category}
-                  </span>
-                </div>
+                      {event.images.map((img, i) => (
+                        <SwiperSlide key={i}>
+                          <div className="relative aspect-[16/10] overflow-hidden border-2 border-black filter grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src={img} alt={`${event.title} photo ${i + 1}`} className="w-full h-full object-cover" />
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
 
-                {/* Content */}
-                <div className="p-4 space-y-4 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-2xl font-anton text-white uppercase tracking-wider group-hover:text-[var(--neon-yellow)] transition-colors mt-2 mb-2 leading-tight">
+                  {/* Event Details */}
+                  <div className={`space-y-6 bg-black p-8 border-4 border-black -rotate-1 relative ${isEven ? 'lg:order-2 shadow-[8px_8px_0px_var(--neon-green)] event-anim-right' : 'lg:order-1 shadow-[8px_8px_0px_var(--neon-pink)] event-anim-left'}`}>
+                    
+                    {event.featured && (
+                      <div className="absolute top-0 right-0 p-4 transform translate-x-4 -translate-y-4">
+                        <span className="bg-[var(--neon-pink)] text-white text-xl font-anton px-4 py-1 border-2 border-black rotate-[12deg] inline-block shadow-[4px_4px_0_#000]">
+                          FEATURED
+                        </span>
+                      </div>
+                    )}
+                    
+                    <span className="bg-[var(--neon-yellow)] text-black px-4 py-1 font-anton text-sm uppercase tracking-widest border-2 border-black shadow-[2px_2px_0_#000] inline-block mb-2 transform -rotate-2">
+                       {event.category}
+                    </span>
+
+                    <h3 className="text-4xl sm:text-6xl font-anton text-white uppercase leading-none text-stroke-black drop-shadow-[4px_4px_0_#000] hover:text-[var(--neon-yellow)] transition-colors">
                       {event.title}
                     </h3>
-                    <p className="text-sm font-inter text-zinc-400 line-clamp-3">
+
+                    <p className="text-lg font-bold font-inter text-zinc-300 leading-relaxed">
                       {event.description}
                     </p>
+
+                    <div className="space-y-4 pt-6 mt-6 border-t-4 border-dashed border-zinc-800">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-[var(--neon-pink)] flex items-center justify-center border-2 border-black shadow-[2px_2px_0_#000]">
+                          <Calendar size={24} className="text-black" />
+                        </div>
+                        <div>
+                          <p className="text-2xl font-anton text-white tracking-wider uppercase">
+                            {event.date}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-[var(--neon-green)] flex items-center justify-center border-2 border-black shadow-[2px_2px_0_#000]">
+                          <MapPin size={24} className="text-black" />
+                        </div>
+                        <div>
+                          <p className="text-2xl font-anton text-white tracking-wider uppercase">
+                            {event.venue}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   
-                  <div className="pt-4 border-t-2 border-dashed border-zinc-800 space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-[var(--neon-pink)] flex items-center justify-center border-2 border-black shadow-[2px_2px_0_#000]">
-                        <Calendar size={16} className="text-black" />
-                      </div>
-                      <span className="text-sm font-bold text-zinc-300">
-                        {event.date}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-[var(--neon-green)] flex items-center justify-center border-2 border-black shadow-[2px_2px_0_#000]">
-                        <MapPin size={16} className="text-black" />
-                      </div>
-                      <span className="text-sm font-bold text-zinc-300">
-                        {event.venue.split(",")[0]}
-                      </span>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
+
+        {/* Professor Section */}
+        <section className="border-t-8 border-white bg-black">
+          <ProfessorSection />
+        </section>
+
       </main>
       <Footer />
     </>

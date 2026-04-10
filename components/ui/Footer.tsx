@@ -12,32 +12,20 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-black border-t-8 border-white overflow-hidden py-12">
-      <div className="absolute inset-0 halftone-overlay opacity-30 pointer-events-none"></div>
+    <footer className="relative bg-[url('/images/nav_footer_bg.png')] bg-cover bg-center border-t-8 border-white overflow-hidden py-12">
+      <div className="absolute inset-0 bg-black/60 halftone-overlay opacity-50 pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           
           {/* LEFT: Branding */}
           <div className="flex flex-col items-center md:items-start group">
-            <Link href="/" className="flex items-center gap-4 group">
+            <Link href="/" className="flex items-center group">
               <img 
                 src="/images/logo.png" 
                 alt="Natvansh Logo" 
-                className="w-16 h-16 md:w-20 md:h-20 object-contain group-hover:-rotate-12 group-hover:scale-110 transition-all duration-300 drop-shadow-[4px_4px_0px_#39FF14]" 
+                className="h-24 md:h-32 w-auto object-contain" 
               />
-              <div className="flex flex-col">
-                <h2 className="text-5xl sm:text-6xl font-anton tracking-widest uppercase transition-transform group-hover:scale-105"
-                    style={{ 
-                      backgroundImage: "linear-gradient(to right, #FF007F, #FFFF00, #39FF14)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      textShadow: "0 0 20px rgba(255,0,127,0.4)"
-                    }}>
-                  NATVANSH
-                </h2>
-                <h3 className="font-bebas text-xl text-[var(--neon-pink)] uppercase tracking-widest mt-[-5px]">Drama & Film Club</h3>
-              </div>
             </Link>
           </div>
 
@@ -69,10 +57,11 @@ export default function Footer() {
 
         {/* BOTTOM ROW: Links & Copyright */}
         <div className="mt-12 pt-6 border-t-2 border-dashed border-zinc-700 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex gap-6 font-anton text-lg tracking-wider text-white">
+          <div className="flex flex-wrap gap-6 font-anton text-lg tracking-wider text-white justify-center">
             <Link href="/" className="hover:text-[var(--neon-yellow)]">HOME</Link>
             <Link href="/events" className="hover:text-[var(--neon-green)]">EVENTS</Link>
             <Link href="/team" className="hover:text-[var(--neon-pink)]">TEAM</Link>
+            <Link href="/gallery" className="hover:text-[var(--neon-magenta)]">GALLERY</Link>
             <Link href="/developers" className="hover:text-blue-400">DEVELOPERS</Link>
           </div>
           

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Anton, Bebas_Neue } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 const inter = Inter({
@@ -22,6 +23,8 @@ const bebasNeue = Bebas_Neue({
   subsets: ["latin"],
   display: "swap",
 });
+
+import SplashScreen from "@/components/ui/SplashScreen";
 
 export const metadata: Metadata = {
   title: "Natvansh — Drama & Film Club | NIT Patna",
@@ -49,15 +52,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      data-theme="dark"
-      className={`${inter.variable} ${anton.variable} ${bebasNeue.variable}`}
-      suppressHydrationWarning
-    >
-      <body className="min-h-screen antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html
+        lang="en"
+        data-theme="dark"
+        className={`${inter.variable} ${anton.variable} ${bebasNeue.variable}`}
+        suppressHydrationWarning
+      >
+        <body className="min-h-screen antialiased">
+          <ThemeProvider>
+            <SplashScreen />
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

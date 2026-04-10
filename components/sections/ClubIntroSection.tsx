@@ -5,15 +5,20 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { Users, Calendar, Award, Film } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCards, Autoplay, Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-cards";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stats = [
-  { icon: Users, value: "100+", label: "REBELS", color: "var(--neon-pink)" },
-  { icon: Calendar, value: "50+", label: "GIGS", color: "var(--neon-yellow)" },
-  { icon: Award, value: "15+", label: "TROPHIES", color: "var(--neon-green)" },
-  { icon: Film, value: "10+", label: "YEARS", color: "var(--neon-orange)" },
+const carouselImages = [
+  "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1507924538820-ede94a04019d?w=800&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?w=800&h=600&fit=crop",
 ];
 
 export default function ClubIntroSection() {
@@ -34,52 +39,18 @@ export default function ClubIntroSection() {
         ease: "power3.out",
       });
 
-      // Animate stats cards
-      gsap.from(".stat-card", {
+      // Animate carousel entrance
+      gsap.from(".intro-carousel-wrapper", {
         scrollTrigger: {
-          trigger: ".stats-grid",
+          trigger: ".intro-carousel-wrapper",
           start: "top 85%",
           toggleActions: "play none none reverse",
         },
         opacity: 0,
-        y: 40,
-        rotationZ: () => Math.random() * 6 - 3,
-        duration: 0.5,
-        stagger: 0.1,
+        x: 40,
+        rotationZ: 5,
+        duration: 0.6,
         ease: "back.out(1.2)",
-      });
-
-      // Counter animation
-      const counters = container.current?.querySelectorAll(".stat-value");
-      counters?.forEach((counter) => {
-        const target = counter.getAttribute("data-value") || "0";
-        const num = parseInt(target.replace("+", ""));
-
-        ScrollTrigger.create({
-          trigger: counter,
-          start: "top 85%",
-          onEnter: () => {
-            gsap.fromTo(
-              counter,
-              { textContent: "0" },
-              {
-                textContent: num,
-                duration: 2,
-                ease: "power2.out",
-                snap: { textContent: 1 },
-                onUpdate: function () {
-                  const val = Math.round(
-                    parseFloat(
-                      (counter as HTMLElement).textContent || "0"
-                    )
-                  );
-                  (counter as HTMLElement).textContent = val + (target.includes("+") ? "+" : "");
-                },
-              }
-            );
-          },
-          once: true,
-        });
       });
     },
     { scope: container }
@@ -88,7 +59,7 @@ export default function ClubIntroSection() {
   return (
     <section
       ref={container}
-      className="section-padding relative overflow-hidden bg-grunge-dark halftone-overlay"
+      className="section-padding relative overflow-hidden bg-grunge-purple halftone-overlay"
     >
       <div className="max-w-6xl mx-auto relative z-10">
         <SectionHeading
@@ -117,30 +88,41 @@ export default function ClubIntroSection() {
             </div>
           </div>
 
-          {/* Stats Grid */}
-          <div className="stats-grid grid grid-cols-2 gap-6">
-            {stats.map((stat, i) => (
-              <div
-                key={stat.label}
-                className={`stat-card grunge-card p-6 text-center transform ${i % 2 === 0 ? '-rotate-2' : 'rotate-2'}`}
-              >
-                <div
-                  className="w-16 h-16 mx-auto mb-4 border-2 border-black flex items-center justify-center shadow-[4px_4px_0_#000]"
-                  style={{ background: stat.color }}
+          {/* Image Carousel */}
+          <div className="intro-carousel-wrapper p-4 bg-[var(--neon-yellow)] border-4 border-black shadow-[10px_10px_0_#000] transform -rotate-2">
+            <div className="border-4 border-black bg-zinc-900 pb-12 relative group">
+                <Swiper
+                effect="cards"
+                grabCursor={true}
+                modules={[EffectCards, Autoplay, Pagination, Navigation]}
+                autoplay={{ delay: 2500, disableOnInteraction: false }}
+                pagination={{ clickable: true, dynamicBullets: true }}
+                navigation={{ nextEl: ".intro-next", prevEl: ".intro-prev" }}
+                className="w-full h-auto aspect-[4/3]"
                 >
-                  <stat.icon size={32} className="text-black" />
+                {carouselImages.map((src, i) => (
+                    <SwiperSlide key={i} className="bg-black border-r-4 border-b-4 border-black">
+                    <img
+                        src={src}
+                        alt={`Club activity ${i + 1}`}
+                        className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-300"
+                    />
+                    {/* Decorative tape on photos */}
+                    <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 w-24 h-6 bg-white border-2 border-black rotate-[-3deg] opacity-80 mix-blend-screen" style={{ boxShadow: "inset 0 0 4px rgba(0,0,0,0.5)"}}></div>
+                    </SwiperSlide>
+                ))}
+                </Swiper>
+
+                {/* Custom Navigation Buttons */}
+                <div className="absolute bottom-2 left-0 right-0 flex justify-between px-6 z-20 pointer-events-none">
+                  <button className="intro-prev pointer-events-auto bg-[var(--neon-pink)] text-black border-2 border-black font-anton px-4 py-1 tracking-wider shadow-[2px_2px_0_var(--neon-green)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[4px_4px_0_var(--neon-green)] transition-all">
+                    ← PREV
+                  </button>
+                  <button className="intro-next pointer-events-auto bg-[var(--neon-pink)] text-black border-2 border-black font-anton px-4 py-1 tracking-wider shadow-[2px_2px_0_var(--neon-green)] hover:-translate-y-1 hover:translate-x-1 hover:shadow-[4px_4px_0_var(--neon-green)] transition-all">
+                    NEXT →
+                  </button>
                 </div>
-                <p
-                  className="stat-value text-5xl font-anton font-bold text-white text-stroke-black drop-shadow-[3px_3px_0_#000]"
-                  data-value={stat.value}
-                >
-                  {stat.value}
-                </p>
-                <p className="text-xl font-anton uppercase mt-2 text-gray-300">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
