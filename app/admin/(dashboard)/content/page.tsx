@@ -172,7 +172,7 @@ export default function AdminContentPage() {
             )}
 
             {/* Metadata Fields */}
-            {Object.keys(section.metadata).length > 0 && (
+            {section.metadata && Object.keys(section.metadata).length > 0 && (
               <div>
                 <label className="block text-xs font-inter font-bold mb-2 text-zinc-500 uppercase">Metadata</label>
                 <div className="grid sm:grid-cols-2 gap-3">
