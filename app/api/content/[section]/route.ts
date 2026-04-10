@@ -13,8 +13,8 @@ export async function GET(
     const content = await SiteContent.findOne({ section });
     if (!content) return NextResponse.json({ error: "Content not found" }, { status: 404 });
     return NextResponse.json(content);
-  } catch {
-    return NextResponse.json({ error: "Failed to fetch content" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to fetch content" , details: error.message }, { status: 500 });
   }
 }
 
@@ -35,7 +35,7 @@ export async function PUT(
       { new: true, upsert: true }
     );
     return NextResponse.json(content);
-  } catch {
-    return NextResponse.json({ error: "Failed to update content" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to update content" , details: error.message }, { status: 500 });
   }
 }

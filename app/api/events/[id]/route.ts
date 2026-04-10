@@ -13,8 +13,8 @@ export async function GET(
     const event = await Event.findById(id);
     if (!event) return NextResponse.json({ error: "Event not found" }, { status: 404 });
     return NextResponse.json(event);
-  } catch {
-    return NextResponse.json({ error: "Failed to fetch event" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to fetch event" , details: error.message }, { status: 500 });
   }
 }
 
@@ -32,8 +32,8 @@ export async function PUT(
     const event = await Event.findByIdAndUpdate(id, body, { new: true });
     if (!event) return NextResponse.json({ error: "Event not found" }, { status: 404 });
     return NextResponse.json(event);
-  } catch {
-    return NextResponse.json({ error: "Failed to update event" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to update event" , details: error.message }, { status: 500 });
   }
 }
 
@@ -50,7 +50,7 @@ export async function DELETE(
     const event = await Event.findByIdAndDelete(id);
     if (!event) return NextResponse.json({ error: "Event not found" }, { status: 404 });
     return NextResponse.json({ message: "Event deleted" });
-  } catch {
-    return NextResponse.json({ error: "Failed to delete event" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to delete event" , details: error.message }, { status: 500 });
   }
 }

@@ -8,8 +8,8 @@ export async function GET() {
     await dbConnect();
     const images = await GalleryImage.find().sort({ order: 1, createdAt: -1 });
     return NextResponse.json(images);
-  } catch {
-    return NextResponse.json({ error: "Failed to fetch gallery" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to fetch gallery" , details: error.message }, { status: 500 });
   }
 }
 
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const image = await GalleryImage.create(body);
     return NextResponse.json(image, { status: 201 });
-  } catch {
-    return NextResponse.json({ error: "Failed to create gallery image" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to create gallery image" , details: error.message }, { status: 500 });
   }
 }

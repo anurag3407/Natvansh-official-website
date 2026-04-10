@@ -13,8 +13,8 @@ export async function GET(
     const member = await TeamMember.findById(id);
     if (!member) return NextResponse.json({ error: "Member not found" }, { status: 404 });
     return NextResponse.json(member);
-  } catch {
-    return NextResponse.json({ error: "Failed to fetch member" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to fetch member" , details: error.message }, { status: 500 });
   }
 }
 
@@ -32,8 +32,8 @@ export async function PUT(
     const member = await TeamMember.findByIdAndUpdate(id, body, { new: true });
     if (!member) return NextResponse.json({ error: "Member not found" }, { status: 404 });
     return NextResponse.json(member);
-  } catch {
-    return NextResponse.json({ error: "Failed to update member" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to update member" , details: error.message }, { status: 500 });
   }
 }
 
@@ -50,7 +50,7 @@ export async function DELETE(
     const member = await TeamMember.findByIdAndDelete(id);
     if (!member) return NextResponse.json({ error: "Member not found" }, { status: 404 });
     return NextResponse.json({ message: "Member deleted" });
-  } catch {
-    return NextResponse.json({ error: "Failed to delete member" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to delete member" , details: error.message }, { status: 500 });
   }
 }

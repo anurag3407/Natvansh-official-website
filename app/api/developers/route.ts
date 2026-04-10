@@ -8,8 +8,8 @@ export async function GET() {
     await dbConnect();
     const developers = await Developer.find().sort({ order: 1 });
     return NextResponse.json(developers);
-  } catch {
-    return NextResponse.json({ error: "Failed to fetch developers" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to fetch developers" , details: error.message }, { status: 500 });
   }
 }
 
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const developer = await Developer.create(body);
     return NextResponse.json(developer, { status: 201 });
-  } catch {
-    return NextResponse.json({ error: "Failed to create developer" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to create developer" , details: error.message }, { status: 500 });
   }
 }

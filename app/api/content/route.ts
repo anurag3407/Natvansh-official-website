@@ -8,7 +8,7 @@ export async function GET() {
     await dbConnect();
     const content = await SiteContent.find();
     return NextResponse.json(content);
-  } catch {
-    return NextResponse.json({ error: "Failed to fetch content" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to fetch content" , details: error.message }, { status: 500 });
   }
 }

@@ -17,8 +17,8 @@ export async function PUT(
     const image = await GalleryImage.findByIdAndUpdate(id, body, { new: true });
     if (!image) return NextResponse.json({ error: "Image not found" }, { status: 404 });
     return NextResponse.json(image);
-  } catch {
-    return NextResponse.json({ error: "Failed to update image" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to update image" , details: error.message }, { status: 500 });
   }
 }
 
@@ -35,7 +35,7 @@ export async function DELETE(
     const image = await GalleryImage.findByIdAndDelete(id);
     if (!image) return NextResponse.json({ error: "Image not found" }, { status: 404 });
     return NextResponse.json({ message: "Image deleted" });
-  } catch {
-    return NextResponse.json({ error: "Failed to delete image" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to delete image" , details: error.message }, { status: 500 });
   }
 }

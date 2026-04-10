@@ -8,8 +8,8 @@ export async function GET() {
     await dbConnect();
     const events = await Event.find().sort({ createdAt: -1 });
     return NextResponse.json(events);
-  } catch {
-    return NextResponse.json({ error: "Failed to fetch events" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to fetch events" , details: error.message }, { status: 500 });
   }
 }
 
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const event = await Event.create(body);
     return NextResponse.json(event, { status: 201 });
-  } catch {
-    return NextResponse.json({ error: "Failed to create event" }, { status: 500 });
+  } catch (error: any) { console.error("API error:", error);
+    return NextResponse.json({ error: "Failed to create event" , details: error.message }, { status: 500 });
   }
 }
