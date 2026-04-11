@@ -60,48 +60,48 @@ const TeamCard = ({ person }: { person: TeamMember }) => {
           style={{ transform: transformStyle }}
         />
       </div>
-    <div className="p-3 sm:p-6 flex flex-col flex-1 items-start justify-between text-left gap-3 sm:gap-8">
-      <div className="w-full">
-        <div>
-          <h4 className="font-inter font-bold text-sm leading-tight sm:text-2xl text-white tracking-tight sm:leading-tight line-clamp-2">
-            {person.name}
-          </h4>
-          <p className="text-xs sm:text-sm font-medium text-zinc-400 mt-0.5 sm:mt-1 line-clamp-2">{person.role}</p>
+      <div className="p-3 sm:p-6 flex flex-col flex-1 items-start justify-between text-left gap-3 sm:gap-8">
+        <div className="w-full">
+          <div>
+            <h4 className="font-inter font-bold text-sm leading-tight sm:text-2xl text-white tracking-tight sm:leading-tight line-clamp-2">
+              {person.name}
+            </h4>
+            <p className="text-xs sm:text-sm font-medium text-zinc-400 mt-0.5 sm:mt-1 line-clamp-2">{person.role}</p>
+          </div>
+          <div className="mt-3 sm:mt-6 space-y-1 sm:space-y-2">
+            {person.campus && (
+              <span className={`inline-block text-[8px] sm:text-[10px] uppercase font-bold tracking-wider px-1.5 sm:px-2 py-[2px] sm:py-0.5 border sm:border-2 border-black shadow-[1px_1px_0_#000] sm:shadow-[2px_2px_0_#000] text-black ${person.campus === "Bihta" ? "bg-[var(--neon-cyan)]" : "bg-[var(--neon-green)]"}`}>
+                {person.campus} Campus
+              </span>
+            )}
+            {!person.campus && (
+              <span className="inline-block text-[8px] sm:text-[10px] uppercase font-bold tracking-wider px-1.5 sm:px-2 py-[2px] sm:py-0.5 border sm:border-2 border-black shadow-[1px_1px_0_#000] sm:shadow-[2px_2px_0_#000] text-black bg-[var(--neon-yellow)]">
+                Patna Campus
+              </span>
+            )}
+            {person.year && (
+              <p className="text-[10px] sm:text-sm text-zinc-300 font-medium tracking-wider">Batch {person.year}</p>
+            )}
+          </div>
         </div>
-        <div className="mt-3 sm:mt-6 space-y-1 sm:space-y-2">
-          {person.campus && (
-            <span className={`inline-block text-[8px] sm:text-[10px] uppercase font-bold tracking-wider px-1.5 sm:px-2 py-[2px] sm:py-0.5 border sm:border-2 border-black shadow-[1px_1px_0_#000] sm:shadow-[2px_2px_0_#000] text-black ${person.campus === "Bihta" ? "bg-[var(--neon-cyan)]" : "bg-[var(--neon-green)]"}`}>
-              {person.campus} Campus
-            </span>
+        <div className="flex items-center gap-2 sm:gap-6 w-full justify-start mt-2 sm:mt-2 scale-90 sm:scale-100 origin-left">
+          {person.socialLinks?.instagram && (
+            <a href={person.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white transition-colors"><IconInstagram size={22} /></a>
           )}
-          {!person.campus && (
-            <span className="inline-block text-[8px] sm:text-[10px] uppercase font-bold tracking-wider px-1.5 sm:px-2 py-[2px] sm:py-0.5 border sm:border-2 border-black shadow-[1px_1px_0_#000] sm:shadow-[2px_2px_0_#000] text-black bg-[var(--neon-yellow)]">
-              Patna Campus
-            </span>
+          {person.socialLinks?.linkedin && (
+            <a href={person.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white transition-colors"><IconLinkedin size={20} /></a>
           )}
-          {person.year && (
-            <p className="text-[10px] sm:text-sm text-zinc-300 font-medium tracking-wider">Batch {person.year}</p>
+          {person.socialLinks?.email && (
+            <a href={`mailto:${person.socialLinks.email}`} className="text-zinc-300 hover:text-white transition-colors"><IconWhatsapp size={22} /></a>
+          )}
+          {!person.socialLinks?.instagram && !person.socialLinks?.linkedin && !person.socialLinks?.email && (
+            <>
+              <span className="text-zinc-300"><IconInstagram size={22} /></span>
+              <span className="text-zinc-300"><IconLinkedin size={20} /></span>
+            </>
           )}
         </div>
       </div>
-      <div className="flex items-center gap-2 sm:gap-6 w-full justify-start mt-2 sm:mt-2 scale-90 sm:scale-100 origin-left">
-        {person.socialLinks?.instagram && (
-          <a href={person.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white transition-colors"><IconInstagram size={22} /></a>
-        )}
-        {person.socialLinks?.linkedin && (
-          <a href={person.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white transition-colors"><IconLinkedin size={20} /></a>
-        )}
-        {person.socialLinks?.email && (
-          <a href={`mailto:${person.socialLinks.email}`} className="text-zinc-300 hover:text-white transition-colors"><IconWhatsapp size={22} /></a>
-        )}
-        {!person.socialLinks?.instagram && !person.socialLinks?.linkedin && !person.socialLinks?.email && (
-          <>
-            <span className="text-zinc-300"><IconInstagram size={22} /></span>
-            <span className="text-zinc-300"><IconLinkedin size={20} /></span>
-          </>
-        )}
-      </div>
-    </div>
     </div>
   );
 };
@@ -155,8 +155,8 @@ export default function TeamPage() {
   );
 
   const teamSections = [
-    { name: "CREATIVE TEAM", members: creativeTeam, bg: "bg-[url('/images/bg_grunge_purple.png')]" },
-    { name: "TECHNICAL TEAM", members: technicalTeam, bg: "bg-[url('/images/bg_dark_texture.png')]" },
+    { name: "SENIOR MEMBERS", members: creativeTeam, bg: "bg-[url('/images/bg_grunge_purple.png')]" },
+    { name: "JUNIOR MEMBERS", members: technicalTeam, bg: "bg-[url('/images/bg_dark_texture.png')]" },
     ...(managementTeam.length > 0 ? [{ name: "MANAGEMENT TEAM", members: managementTeam, bg: "bg-[url('/images/bg_grunge_red.png')]" }] : []),
   ];
 
