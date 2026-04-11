@@ -50,41 +50,41 @@ const TeamCard = ({ person }: { person: TeamMember }) => {
     : 'none';
 
   return (
-    <div className="bg-[#050505] rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden border border-zinc-900 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(255,100,50,0.3)] flex flex-col h-full mx-auto w-full max-w-[260px] sm:max-w-[320px]">
-      <div className="relative h-48 sm:h-60 w-full bg-[url('/images/card_doodle_bg.png')] bg-cover bg-center overflow-hidden flex items-end justify-center">
-        <div className="absolute inset-0 bg-black/10 mix-blend-multiply rounded-t-[1.5rem]"></div>
+    <div className="bg-[#050505] rounded-xl sm:rounded-[1.5rem] overflow-hidden border border-zinc-900 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(255,100,50,0.3)] flex flex-col h-full mx-auto w-full max-w-[180px] sm:max-w-[320px]">
+      <div className="relative h-36 sm:h-60 w-full bg-[url('/images/card_doodle_bg.png')] bg-cover bg-center overflow-hidden flex items-end justify-center">
+        <div className="absolute inset-0 bg-black/10 mix-blend-multiply rounded-t-xl sm:rounded-t-[1.5rem]"></div>
         <img
           src={person.image || fallbackImage}
           alt={person.name}
-          className="relative z-10 w-full h-[90%] object-cover object-top mask-image-bottom drop-shadow-[0_0_12px_rgba(255,255,255,0.75)] filter contrast-125 transition-transform duration-500 ease-in-out"
+          className="relative z-10 w-full h-[90%] object-cover object-top mask-image-bottom drop-shadow-[0_0_12px_rgba(255,255,255,0.75)] filter contrast-125 transition-transform duration-500 ease-in-out block"
           style={{ transform: transformStyle }}
         />
       </div>
-    <div className="p-4 sm:p-6 flex flex-col flex-1 items-start justify-between text-left gap-4 sm:gap-8">
+    <div className="p-3 sm:p-6 flex flex-col flex-1 items-start justify-between text-left gap-3 sm:gap-8">
       <div className="w-full">
         <div>
-          <h4 className="font-inter font-bold text-lg sm:text-2xl text-white tracking-tight leading-tight">
+          <h4 className="font-inter font-bold text-sm leading-tight sm:text-2xl text-white tracking-tight sm:leading-tight line-clamp-2">
             {person.name}
           </h4>
-          <p className="text-xs sm:text-sm font-medium text-zinc-400 mt-1">{person.role}</p>
+          <p className="text-xs sm:text-sm font-medium text-zinc-400 mt-0.5 sm:mt-1 line-clamp-2">{person.role}</p>
         </div>
-        <div className="mt-4 sm:mt-6 space-y-1.5 sm:space-y-2">
+        <div className="mt-3 sm:mt-6 space-y-1 sm:space-y-2">
           {person.campus && (
-            <span className={`inline-block text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 border-2 border-black shadow-[2px_2px_0_#000] text-black ${person.campus === "Bihta" ? "bg-[var(--neon-cyan)]" : "bg-[var(--neon-green)]"}`}>
+            <span className={`inline-block text-[8px] sm:text-[10px] uppercase font-bold tracking-wider px-1.5 sm:px-2 py-[2px] sm:py-0.5 border sm:border-2 border-black shadow-[1px_1px_0_#000] sm:shadow-[2px_2px_0_#000] text-black ${person.campus === "Bihta" ? "bg-[var(--neon-cyan)]" : "bg-[var(--neon-green)]"}`}>
               {person.campus} Campus
             </span>
           )}
           {!person.campus && (
-            <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 border-2 border-black shadow-[2px_2px_0_#000] text-black bg-[var(--neon-yellow)]">
+            <span className="inline-block text-[8px] sm:text-[10px] uppercase font-bold tracking-wider px-1.5 sm:px-2 py-[2px] sm:py-0.5 border sm:border-2 border-black shadow-[1px_1px_0_#000] sm:shadow-[2px_2px_0_#000] text-black bg-[var(--neon-yellow)]">
               Patna Campus
             </span>
           )}
           {person.year && (
-            <p className="text-sm text-zinc-300 font-medium tracking-wider">Batch {person.year}</p>
+            <p className="text-[10px] sm:text-sm text-zinc-300 font-medium tracking-wider">Batch {person.year}</p>
           )}
         </div>
       </div>
-      <div className="flex items-center gap-6 w-full justify-start mt-2">
+      <div className="flex items-center gap-2 sm:gap-6 w-full justify-start mt-2 sm:mt-2 scale-90 sm:scale-100 origin-left">
         {person.socialLinks?.instagram && (
           <a href={person.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white transition-colors"><IconInstagram size={22} /></a>
         )}
@@ -164,7 +164,7 @@ export default function TeamPage() {
     <>
       <ScrollProgress />
       <Navbar />
-      <main ref={container} className="min-h-screen pt-28 bg-black">
+      <main ref={container} className="min-h-screen pt-[60px] sm:pt-[10vh] md:pt-[12vh] bg-black">
         {/* Header */}
         <section className="section-padding bg-grunge-dark halftone-overlay pb-12 relative border-b-8 border-white">
           <div className="max-w-6xl mx-auto relative z-10 text-center">
@@ -183,7 +183,7 @@ export default function TeamPage() {
             <h3 className="text-4xl md:text-5xl border-b-4 border-black pb-2 font-anton text-left mb-12 text-white uppercase">
               POST BEARERS
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
               {postBearers.map((person) => (
                 <div key={person._id || person.name} className="member-card-wrapper">
                   <TeamCard person={person} />
@@ -204,7 +204,7 @@ export default function TeamPage() {
                 <h3 className="text-4xl md:text-5xl font-anton mb-12 text-left text-white border-b-4 border-[var(--neon-pink)] pb-2 inline-block">
                   {category.name}
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
                   {category.members.map((member) => (
                     <div key={member._id || member.name} className="member-card-wrapper">
                       <TeamCard person={member} />

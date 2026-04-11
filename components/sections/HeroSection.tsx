@@ -53,7 +53,7 @@ export default function HeroSection() {
   return (
     <section
       ref={container}
-      className="relative min-h-[100dvh] w-full flex flex-col items-center overflow-hidden bg-[var(--neon-yellow)] bg-[url('/images/bg_grunge_red.png')] bg-cover bg-center pt-[18vh] sm:pt-[15vh] md:pt-0 md:justify-center"
+      className="relative min-h-[100dvh] w-full flex flex-col items-center overflow-hidden bg-[var(--neon-yellow)] bg-[url('/images/bg_grunge_red.png')] bg-cover bg-center pt-[18vh] sm:pt-[15vh] md:pt-[12vh] lg:pt-[14vh] md:justify-center"
     >
       <div className="absolute inset-0 bg-white/70 halftone-overlay pointer-events-none mix-blend-overlay"></div>
 

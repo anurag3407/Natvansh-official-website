@@ -68,7 +68,7 @@ export default function GalleryPage() {
     <>
       <ScrollProgress />
       <Navbar />
-      <main ref={container} className="min-h-screen pt-28 bg-black">
+      <main ref={container} className="min-h-screen pt-[60px] sm:pt-[10vh] md:pt-[12vh] bg-black">
         {/* Header */}
         <section className="section-padding bg-[url('/images/bg_grunge_red.png')] bg-cover halftone-overlay pb-12 border-b-8 border-white">
           <div className="max-w-6xl mx-auto relative z-10 flex flex-col items-center justify-center text-center">

@@ -40,11 +40,11 @@ export default function Navbar() {
         <div className="relative w-full h-full max-w-[100vw] px-0 flex items-center justify-between z-10">
 
           {/* Pop-out Logo */}
-          <Link href="/" className="relative flex items-center shrink-0 w-[80px] sm:w-[120px] md:w-[200px] h-full z-50 ml-0 pl-1 sm:pl-3">
+          <Link href="/" className="relative flex items-center shrink-0 w-[110px] sm:w-[140px] md:w-[200px] h-full z-50 ml-0 pl-1 sm:pl-3">
             <img
               src="/images/logo.png"
               alt="Natvansh Logo"
-              className="absolute top-1/2 -translate-y-[49%] left-0 h-[70px] sm:h-[100px] md:h-[240px] w-auto object-contain drop-shadow-[2px_2px_0_rgba(0,0,0,0.4)] sm:drop-shadow-[4px_4px_0_rgba(0,0,0,0.4)] md:drop-shadow-[8px_8px_0_rgba(0,0,0,0.4)]"
+              className="absolute top-1/2 -translate-y-[49%] left-0 h-[95px] sm:h-[120px] md:h-[240px] w-auto object-contain drop-shadow-[2px_2px_0_rgba(0,0,0,0.4)] sm:drop-shadow-[4px_4px_0_rgba(0,0,0,0.4)] md:drop-shadow-[8px_8px_0_rgba(0,0,0,0.4)]"
             />
           </Link>
 
