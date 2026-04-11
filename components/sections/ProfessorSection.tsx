@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,8 +9,30 @@ import { Quote } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface ProfessorContent {
+  title: string;
+  content: string;
+  image: string;
+  metadata: {
+    designation?: string;
+    department?: string;
+  };
+}
+
 export default function ProfessorSection() {
   const container = useRef<HTMLDivElement>(null);
+  const [content, setContent] = useState<ProfessorContent | null>(null);
+
+  useEffect(() => {
+    fetch("/api/content/professor")
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.error) {
+          setContent(data);
+        }
+      })
+      .catch((err) => console.error("Failed to fetch professor content", err));
+  }, []);
 
   useGSAP(
     () => {
@@ -74,15 +96,21 @@ export default function ProfessorSection() {
 
           {/* Message */}
           <blockquote className="prof-message space-y-6">
-            <p className="text-xl sm:text-2xl leading-relaxed font-bold font-inter text-white">
-              "Drama and cinema are not merely forms of entertainment — they are mirrors of society,
-              vehicles of empathy, and crucibles of character. At Natvansh, we nurture not just performers,
-              but thinkers, leaders, and storytellers who carry the spark of creativity into every walk of life."
-            </p>
-            <p className="text-lg leading-relaxed font-bold font-inter text-[var(--neon-yellow)]">
-              "I encourage every student to embrace the stage, for it teaches what classrooms sometimes cannot —
-              the courage to be vulnerable, the art of collaboration, and the power of a story well told."
-            </p>
+            {(content?.content || "Drama and cinema are not merely forms of entertainment — they are mirrors of society, vehicles of empathy, and crucibles of character. At Natvansh, we nurture not just performers, but thinkers, leaders, and storytellers who carry the spark of creativity into every walk of life.\n\nI encourage every student to embrace the stage, for it teaches what classrooms sometimes cannot — the courage to be vulnerable, the art of collaboration, and the power of a story well told.")
+              .split("\n")
+              .filter((p) => p.trim() !== "")
+              .map((paragraph, index) => (
+                <p
+                  key={index}
+                  className={`leading-relaxed font-bold font-inter ${
+                    index === 0
+                      ? "text-xl sm:text-2xl text-white"
+                      : "text-lg text-[var(--neon-yellow)]"
+                  }`}
+                >
+                  "{paragraph.trim()}"
+                </p>
+              ))}
           </blockquote>
 
           {/* Professor Info & Picture */}
@@ -90,8 +118,8 @@ export default function ProfessorSection() {
             <div className="relative w-40 h-40 shrink-0 transform -rotate-3 hover:rotate-0 transition-transform">
               <div className="absolute inset-0 bg-[var(--neon-pink)] border-4 border-black shadow-[6px_6px_0_#000] rotate-6"></div>
               <img 
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop" 
-                alt="Prof. Faculty Name" 
+                src={content?.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop"} 
+                alt={content?.title || "Prof. Faculty Name"} 
                 className="relative z-10 w-full h-full object-cover border-4 border-black shadow-[4px_4px_0_#000] filter contrast-125 grayscale hover:grayscale-0 transition-all duration-500"
               />
               {/* Tape */}
@@ -100,13 +128,13 @@ export default function ProfessorSection() {
             
             <div className="flex flex-col justify-center text-center md:text-left h-full mt-2">
               <p className="font-anton text-3xl tracking-wider text-white uppercase drop-shadow-[2px_2px_0_#000]">
-                Prof. Faculty Name
+                {content?.title || "Prof. Faculty Name"}
               </p>
               <p className="text-xl font-bold text-[var(--neon-green)] uppercase font-inter mt-2">
-                Professor In-Charge, Natvansh
+                {content?.metadata?.designation || "Professor In-Charge, Natvansh"}
               </p>
               <p className="text-md font-bold text-zinc-400 uppercase mt-2">
-                Department of Humanities & Social Sciences, NIT Patna
+                {content?.metadata?.department || "Department of Humanities & Social Sciences, NIT Patna"}
               </p>
             </div>
           </div>
