@@ -86,9 +86,9 @@ export default function RecentEventsSection() {
           subtitle={content ? content.content : "Get a glimpse into our latest high-voltage productions."}
         />
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mt-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 mt-8 sm:mt-12 items-center">
           {/* Image Carousel — Left */}
-          <div className="event-carousel p-4 bg-black border-4 border-black shadow-[8px_8px_0px_#FFFF00] rotate-1">
+          <div className="event-carousel p-1.5 sm:p-2 md:p-4 bg-black border-2 md:border-4 border-black shadow-[3px_3px_0px_#FFFF00] sm:shadow-[4px_4px_0px_#FFFF00] md:shadow-[8px_8px_0px_#FFFF00] md:rotate-1">
               <Swiper
                 effect="coverflow"
                 grabCursor
@@ -125,47 +125,47 @@ export default function RecentEventsSection() {
           </div>
 
           {/* Event Details — Right */}
-          <div className="event-details space-y-6 bg-black p-8 border-4 border-black shadow-[8px_8px_0px_var(--neon-green)] -rotate-1 relative">
-            <div className="absolute top-0 right-0 p-4 transform translate-x-4 -translate-y-4">
-              <span className="bg-[var(--neon-pink)] text-white text-xl font-anton px-4 py-1 border-2 border-black rotate-[12deg] inline-block shadow-[4px_4px_0_#000]">
+          <div className="event-details space-y-4 sm:space-y-6 bg-black p-4 sm:p-5 md:p-8 border-2 md:border-4 border-black shadow-[3px_3px_0px_var(--neon-green)] sm:shadow-[4px_4px_0px_var(--neon-green)] md:shadow-[8px_8px_0px_var(--neon-green)] md:-rotate-1 relative">
+            <div className="absolute top-0 right-0 p-1.5 sm:p-2 md:p-4 transform translate-x-1.5 sm:translate-x-2 md:translate-x-4 -translate-y-1.5 sm:-translate-y-2 md:-translate-y-4">
+              <span className="bg-[var(--neon-pink)] text-white text-xs sm:text-sm md:text-xl font-anton px-2 py-0.5 md:px-4 md:py-1 border-2 border-black rotate-[12deg] inline-block shadow-[2px_2px_0_#000] md:shadow-[4px_4px_0_#000]">
                 FEATURED
               </span>
             </div>
 
-            <h3 className="text-3xl sm:text-4xl md:text-6xl font-anton text-[var(--neon-yellow)] uppercase leading-none text-stroke-black drop-shadow-[4px_4px_0_#000]">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-anton text-[var(--neon-yellow)] uppercase leading-none text-stroke-black drop-shadow-[2px_2px_0_#000] sm:drop-shadow-[4px_4px_0_#000]">
               {content ? content.metadata?.eventTitle : placeholderEvent.title}
             </h3>
 
-            <p className="text-sm md:text-lg font-bold font-inter text-white leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-lg font-bold font-inter text-white leading-relaxed">
               {content ? content.metadata?.eventDescription : placeholderEvent.description}
             </p>
 
-            <div className="space-y-4 pt-4 border-t-2 border-dashed border-zinc-600">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-[var(--neon-pink)] flex items-center justify-center border-2 border-black shadow-[2px_2px_0_#000]">
-                  <Calendar size={20} className="text-black" />
+            <div className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t-2 border-dashed border-zinc-600">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[var(--neon-pink)] flex items-center justify-center border-2 border-black shadow-[2px_2px_0_#000] shrink-0">
+                  <Calendar size={16} className="text-black sm:w-5 sm:h-5" />
                 </div>
                 <div>
-                  <p className="text-lg md:text-2xl font-anton text-white tracking-wider">
+                  <p className="text-sm sm:text-lg md:text-2xl font-anton text-white tracking-wider">
                     {content ? content.metadata?.eventDate : placeholderEvent.date}
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-[var(--neon-green)] flex items-center justify-center border-2 border-black shadow-[2px_2px_0_#000]">
-                  <MapPin size={20} className="text-black" />
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[var(--neon-green)] flex items-center justify-center border-2 border-black shadow-[2px_2px_0_#000] shrink-0">
+                  <MapPin size={16} className="text-black sm:w-5 sm:h-5" />
                 </div>
                 <div>
-                  <p className="text-lg md:text-2xl font-anton text-white tracking-wider">
+                  <p className="text-sm sm:text-lg md:text-2xl font-anton text-white tracking-wider">
                     {content ? content.metadata?.eventVenue : placeholderEvent.venue}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="pt-6">
-              <Link href="/events" className="grunge-btn w-full">
-                {content ? content.metadata?.buttonText : "VIEW ALL EVENTS"} <ArrowRight size={24} className="ml-2" />
+            <div className="pt-4 sm:pt-6">
+              <Link href="/events" className="grunge-btn w-full sm:w-auto justify-center">
+                {content ? content.metadata?.buttonText : "VIEW ALL EVENTS"} <ArrowRight size={20} className="ml-2 shrink-0" />
               </Link>
             </div>
           </div>
@@ -174,4 +174,3 @@ export default function RecentEventsSection() {
     </section>
   );
 }
-

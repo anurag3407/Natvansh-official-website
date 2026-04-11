@@ -58,6 +58,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
@@ -65,6 +66,8 @@ body {
   color: var(--text-primary);
   font-family: var(--font-inter), system-ui, sans-serif;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 ::selection {
@@ -100,7 +103,6 @@ body {
   background-image: var(--bg-image-red);
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
 }
 
 .bg-grunge-purple {
@@ -119,13 +121,21 @@ body {
   position: relative;
 }
 .halftone-overlay::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, transparent 20%, #000 20%, #000 80%, transparent 80%, transparent) 0 0 / 4px 4px;
-  opacity: 0.3;
-  pointer-events: none;
-  z-index: 10;
+  content: none;
+}
+@media (min-width: 768px) {
+  .halftone-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 20%, #000 20%, #000 80%, transparent 80%, transparent) 0 0 / 4px 4px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 10;
+  }
 }
 
 /* --- Blocky Cards & Buttons --- */
@@ -144,16 +154,26 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 2rem;
+  padding: 0.6rem 1.25rem;
   background-color: var(--neon-yellow);
   color: black;
   font-family: var(--font-anton), sans-serif;
   text-transform: uppercase;
-  font-size: 1.25rem;
-  border: 4px solid black;
-  box-shadow: 6px 6px 0px black;
+  font-size: 1rem;
+  border: 3px solid black;
+  box-shadow: 4px 4px 0px black;
   transition: all 0.1s ease-in-out;
   cursor: pointer;
+  max-width: 100%;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .grunge-btn {
+    padding: 0.75rem 2rem;
+    font-size: 1.25rem;
+    border-width: 4px;
+    box-shadow: 6px 6px 0px black;
+  }
 }
 .grunge-btn:hover {
   transform: translate(2px, 2px);
@@ -167,8 +187,9 @@ body {
 
 /* --- Sections --- */
 .section-padding {
-  padding: 6rem 1.5rem;
+  padding: 4rem 1rem;
 }
+@media (min-width: 640px) { .section-padding { padding: 6rem 1.5rem; } }
 @media (min-width: 768px) { .section-padding { padding: 8rem 3rem; } }
 @media (min-width: 1280px) { .section-padding { padding: 10rem 4rem; } }
 

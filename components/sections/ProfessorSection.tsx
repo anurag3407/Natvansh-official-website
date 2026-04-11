@@ -83,19 +83,19 @@ export default function ProfessorSection() {
           subtitle="Words of wisdom from our Professor In-Charge"
         />
 
-        <div className="prof-card bg-black border-4 border-black p-8 sm:p-12 mt-12 relative overflow-visible shadow-[10px_10px_0px_#FFFF00] rotate-1">
+        <div className="prof-card bg-black border-2 md:border-4 border-black p-4 sm:p-6 md:p-12 mt-8 sm:mt-12 relative overflow-visible shadow-[4px_4px_0px_#FFFF00] sm:shadow-[5px_5px_0px_#FFFF00] md:shadow-[10px_10px_0px_#FFFF00] md:rotate-1">
           {/* Decorative grunge tape */}
-          <div className="absolute top-[-15px] left-[50%] transform -translate-x-1/2 w-32 h-6 bg-[var(--neon-pink)] rotate-[-3deg] border-2 border-black" />
+          <div className="absolute top-[-12px] sm:top-[-15px] left-[50%] transform -translate-x-1/2 w-24 sm:w-32 h-5 sm:h-6 bg-[var(--neon-pink)] rotate-[-3deg] border-2 border-black" />
 
           {/* Quote Icon */}
-          <div className="prof-quote-icon mb-8">
-            <div className="w-16 h-16 border-2 border-black flex items-center justify-center bg-[var(--neon-green)] shadow-[4px_4px_0_#000] rotate-[-2deg]">
-              <Quote size={32} className="text-black" />
+          <div className="prof-quote-icon mb-4 sm:mb-6 md:mb-8">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 border-2 border-black flex items-center justify-center bg-[var(--neon-green)] shadow-[3px_3px_0_#000] sm:shadow-[4px_4px_0_#000] rotate-[-2deg]">
+              <Quote size={24} className="text-black sm:w-7 sm:h-7 md:w-8 md:h-8" />
             </div>
           </div>
 
           {/* Message */}
-          <blockquote className="prof-message space-y-6">
+          <blockquote className="prof-message space-y-4 sm:space-y-6">
             {(content?.content || "Drama and cinema are not merely forms of entertainment — they are mirrors of society, vehicles of empathy, and crucibles of character. At Natvansh, we nurture not just performers, but thinkers, leaders, and storytellers who carry the spark of creativity into every walk of life.\n\nI encourage every student to embrace the stage, for it teaches what classrooms sometimes cannot — the courage to be vulnerable, the art of collaboration, and the power of a story well told.")
               .split("\n")
               .filter((p) => p.trim() !== "")
@@ -104,36 +104,36 @@ export default function ProfessorSection() {
                   key={index}
                   className={`leading-relaxed font-bold font-inter ${
                     index === 0
-                      ? "text-xl sm:text-2xl text-white"
-                      : "text-lg text-[var(--neon-yellow)]"
+                      ? "text-base sm:text-xl md:text-2xl text-white"
+                      : "text-sm sm:text-base md:text-lg text-[var(--neon-yellow)]"
                   }`}
                 >
-                  "{paragraph.trim()}"
+                  &ldquo;{paragraph.trim()}&rdquo;
                 </p>
               ))}
           </blockquote>
 
           {/* Professor Info & Picture */}
-          <div className="prof-name flex flex-col md:flex-row items-center md:items-start gap-8 mt-10 pt-8" style={{ borderTop: "4px dashed #333" }}>
-            <div className="relative w-40 h-40 shrink-0 transform -rotate-3 hover:rotate-0 transition-transform">
-              <div className="absolute inset-0 bg-[var(--neon-pink)] border-4 border-black shadow-[6px_6px_0_#000] rotate-6"></div>
+          <div className="prof-name flex flex-col items-center md:flex-row md:items-start gap-6 sm:gap-8 mt-6 sm:mt-8 md:mt-10 pt-6 sm:pt-8" style={{ borderTop: "4px dashed #333" }}>
+            <div className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 shrink-0 transform -rotate-3 hover:rotate-0 transition-transform">
+              <div className="absolute inset-0 bg-[var(--neon-pink)] border-3 sm:border-4 border-black shadow-[4px_4px_0_#000] sm:shadow-[6px_6px_0_#000] rotate-6"></div>
               <img 
                 src={content?.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop"} 
                 alt={content?.title || "Prof. Faculty Name"} 
-                className="relative z-10 w-full h-full object-cover border-4 border-black shadow-[4px_4px_0_#000] filter contrast-125 grayscale hover:grayscale-0 transition-all duration-500"
+                className="relative z-10 w-full h-full object-cover border-3 sm:border-4 border-black shadow-[3px_3px_0_#000] sm:shadow-[4px_4px_0_#000] filter contrast-125 grayscale hover:grayscale-0 transition-all duration-500"
               />
               {/* Tape */}
-              <div className="absolute top-[-10px] right-[-10px] w-12 h-4 bg-[var(--neon-yellow)] border-2 border-black rotate-12 z-20"></div>
+              <div className="absolute top-[-8px] sm:top-[-10px] right-[-8px] sm:right-[-10px] w-10 sm:w-12 h-3 sm:h-4 bg-[var(--neon-yellow)] border-2 border-black rotate-12 z-20"></div>
             </div>
             
-            <div className="flex flex-col justify-center text-center md:text-left h-full mt-2">
-              <p className="font-anton text-3xl tracking-wider text-white uppercase drop-shadow-[2px_2px_0_#000]">
+            <div className="flex flex-col justify-center text-center md:text-left h-full mt-1 sm:mt-2">
+              <p className="font-anton text-xl sm:text-2xl md:text-3xl tracking-wider text-white uppercase drop-shadow-[2px_2px_0_#000]">
                 {content?.title || "Prof. Faculty Name"}
               </p>
-              <p className="text-xl font-bold text-[var(--neon-green)] uppercase font-inter mt-2">
+              <p className="text-sm sm:text-base md:text-xl font-bold text-[var(--neon-green)] uppercase font-inter mt-1.5 sm:mt-2">
                 {content?.metadata?.designation || "Professor In-Charge, Natvansh"}
               </p>
-              <p className="text-md font-bold text-zinc-400 uppercase mt-2">
+              <p className="text-xs sm:text-sm md:text-base font-bold text-zinc-400 uppercase mt-1.5 sm:mt-2">
                 {content?.metadata?.department || "Department of Humanities & Social Sciences, NIT Patna"}
               </p>
             </div>
@@ -143,4 +143,3 @@ export default function ProfessorSection() {
     </section>
   );
 }
-

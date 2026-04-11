@@ -81,29 +81,29 @@ export default function ClubIntroSection() {
           subtitle="WE'RE NOT JUST A CLUB — WE'RE A MOVEMENT."
         />
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center mt-8 sm:mt-12">
           {/* Text Content */}
-          <div className="intro-text space-y-8 bg-black p-8 border-4 border-black shadow-[10px_10px_0px_var(--neon-pink)] rotate-1">
-            <p className="text-base md:text-xl font-inter font-bold leading-relaxed text-white">
-              Founded at the National Institute of Technology, Patna, <strong className="text-[var(--neon-green)] text-xl md:text-2xl font-anton uppercase">Natvansh</strong> is
+          <div className="intro-text space-y-4 sm:space-y-6 md:space-y-8 bg-black p-4 sm:p-5 md:p-8 border-2 md:border-4 border-black shadow-[4px_4px_0px_var(--neon-pink)] sm:shadow-[5px_5px_0px_var(--neon-pink)] md:shadow-[10px_10px_0px_var(--neon-pink)] md:rotate-1">
+            <p className="text-sm sm:text-base md:text-xl font-inter font-bold leading-relaxed text-white">
+              Founded at the National Institute of Technology, Patna, <strong className="text-[var(--neon-green)] text-base sm:text-xl md:text-2xl font-anton uppercase">Natvansh</strong> is
               the heartbeat of the underground dramatic arts. From the raw, chaotic energy of
-              <span className="font-anton text-xl md:text-2xl uppercase ml-2" style={{ color: "var(--neon-yellow)" }}> nukkad natak </span>
+              <span className="font-anton text-base sm:text-xl md:text-2xl uppercase ml-1 sm:ml-2" style={{ color: "var(--neon-yellow)" }}> nukkad natak </span>
               to the cinematic grit of short films, we tear up the script.
             </p>
-            <p className="text-base md:text-xl font-inter font-bold leading-relaxed text-white">
+            <p className="text-sm sm:text-base md:text-xl font-inter font-bold leading-relaxed text-white">
               Our culture is fueled by passion, rebellion, and an unyielding belief that
-              <span className="font-anton uppercase block text-2xl md:text-3xl mt-4 bg-[var(--neon-pink)] text-black px-2 py-1 inline-block -rotate-2 border-2 border-black"> every story must be told loud </span>
+              <span className="font-anton uppercase text-base sm:text-xl md:text-3xl mt-2 sm:mt-4 bg-[var(--neon-pink)] text-black px-1.5 sm:px-2 py-0.5 sm:py-1 inline-block -rotate-2 border-2 border-black"> every story must be told loud </span>
             </p>
-            <div className="inline-block px-4 py-3 md:px-6 md:py-4 border-4 border-black bg-[var(--neon-yellow)] transform -rotate-2 shadow-[4px_4px_0_#000]">
-              <p className="font-anton text-xl md:text-2xl text-black uppercase">
-                "THERE IS SOMETHING SPECIAL!"
+            <div className="inline-block px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 border-2 sm:border-3 md:border-4 border-black bg-[var(--neon-yellow)] transform -rotate-2 shadow-[3px_3px_0_#000] md:shadow-[4px_4px_0_#000]">
+              <p className="font-anton text-sm sm:text-lg md:text-2xl text-black uppercase">
+                &quot;THERE IS SOMETHING SPECIAL!&quot;
               </p>
             </div>
           </div>
 
           {/* Image Carousel */}
-          <div className="intro-carousel-wrapper p-4 bg-[var(--neon-yellow)] border-4 border-black shadow-[10px_10px_0_#000] transform -rotate-2">
-            <div className="border-4 border-black bg-zinc-900 pb-12 relative group">
+          <div className="intro-carousel-wrapper p-1.5 sm:p-2 md:p-4 bg-[var(--neon-yellow)] border-2 md:border-4 border-black shadow-[4px_4px_0_#000] sm:shadow-[5px_5px_0_#000] md:shadow-[10px_10px_0_#000] md:-rotate-2">
+            <div className="border-2 md:border-4 border-black bg-zinc-900 pb-10 sm:pb-12 relative group">
                 <Swiper
                 effect="cards"
                 grabCursor={true}
@@ -121,17 +121,17 @@ export default function ClubIntroSection() {
                         className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-300"
                     />
                     {/* Decorative tape on photos */}
-                    <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 w-24 h-6 bg-white border-2 border-black rotate-[-3deg] opacity-80 mix-blend-screen" style={{ boxShadow: "inset 0 0 4px rgba(0,0,0,0.5)"}}></div>
+                    <div className="absolute top-[-8px] sm:top-[-10px] left-1/2 -translate-x-1/2 w-16 sm:w-24 h-4 sm:h-6 bg-white border-2 border-black rotate-[-3deg] opacity-80 mix-blend-screen" style={{ boxShadow: "inset 0 0 4px rgba(0,0,0,0.5)"}}></div>
                     </SwiperSlide>
                 ))}
                 </Swiper>
 
                 {/* Custom Navigation Buttons */}
-                <div className="absolute bottom-2 left-0 right-0 flex justify-between px-6 z-20 pointer-events-none">
-                  <button className="intro-prev pointer-events-auto bg-[var(--neon-pink)] text-black border-2 border-black font-anton px-4 py-1 tracking-wider shadow-[2px_2px_0_var(--neon-green)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[4px_4px_0_var(--neon-green)] transition-all">
+                <div className="absolute bottom-1.5 sm:bottom-2 left-0 right-0 flex justify-between px-2 sm:px-3 md:px-6 z-20 pointer-events-none">
+                  <button className="intro-prev pointer-events-auto bg-[var(--neon-pink)] text-black border-2 border-black font-anton px-2 py-0.5 sm:px-2 sm:py-1 md:px-4 text-xs sm:text-sm md:text-base tracking-wider shadow-[2px_2px_0_var(--neon-green)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[4px_4px_0_var(--neon-green)] transition-all">
                     ← PREV
                   </button>
-                  <button className="intro-next pointer-events-auto bg-[var(--neon-pink)] text-black border-2 border-black font-anton px-4 py-1 tracking-wider shadow-[2px_2px_0_var(--neon-green)] hover:-translate-y-1 hover:translate-x-1 hover:shadow-[4px_4px_0_var(--neon-green)] transition-all">
+                  <button className="intro-next pointer-events-auto bg-[var(--neon-pink)] text-black border-2 border-black font-anton px-2 py-0.5 sm:px-2 sm:py-1 md:px-4 text-xs sm:text-sm md:text-base tracking-wider shadow-[2px_2px_0_var(--neon-green)] hover:-translate-y-1 hover:translate-x-1 hover:shadow-[4px_4px_0_var(--neon-green)] transition-all">
                     NEXT →
                   </button>
                 </div>
@@ -142,4 +142,3 @@ export default function ClubIntroSection() {
     </section>
   );
 }
-

@@ -77,32 +77,28 @@ export default function SectionHeading({
       : "text-left items-start";
 
   return (
-    <div ref={container} className={`flex flex-col gap-3 mb-12 ${alignClass}`}>
+    <div ref={container} className={`flex flex-col gap-2 sm:gap-3 mb-8 sm:mb-12 ${alignClass}`}>
       {accent && (
         <span
-          className="section-accent font-accent text-xl sm:text-2xl"
-          style={{ color: "var(--accent-purple)" }}
+          className="section-accent font-anton text-sm sm:text-base md:text-xl uppercase tracking-widest bg-[var(--neon-pink)] text-black px-2 py-0.5 sm:px-3 sm:py-1 border-2 border-black inline-block shadow-[2px_2px_0_#000] sm:shadow-[3px_3px_0_#000] rotate-[-2deg]"
         >
           {accent}
         </span>
       )}
       <h2
-        className="section-title text-3xl sm:text-4xl md:text-5xl font-bold leading-tight"
-        style={{ color: "var(--text-primary)" }}
+        className="section-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-anton leading-tight uppercase tracking-wide text-white drop-shadow-[2px_2px_0_#000] sm:drop-shadow-[4px_4px_0_#000]"
       >
         {title}
       </h2>
       {subtitle && (
         <p
-          className="section-subtitle text-base sm:text-lg max-w-2xl"
-          style={{ color: "var(--text-secondary)" }}
+          className="section-subtitle text-xs sm:text-sm md:text-base lg:text-lg max-w-2xl font-inter font-bold text-zinc-300"
         >
           {subtitle}
         </p>
       )}
       <div
-        className="section-line h-1 w-20 rounded-full mt-2"
-        style={{ background: "var(--accent-gradient)" }}
+        className="section-line h-1 w-16 sm:w-20 mt-1 sm:mt-2 bg-[var(--neon-yellow)] border border-black"
       />
       {children}
     </div>

@@ -31,7 +31,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-4 border-black bg-[url('/images/nav_footer_bg.png')] bg-cover bg-center h-[10vh] md:h-[12vh] flex items-center ${isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-3 sm:border-b-4 border-black bg-[url('/images/nav_footer_bg.png')] bg-cover bg-center h-[60px] sm:h-[10vh] md:h-[12vh] flex items-center ${isScrolled
           ? "shadow-[0_5px_0_0_#FFF]"
           : ""
           }`}
@@ -40,11 +40,11 @@ export default function Navbar() {
         <div className="relative w-full h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between z-10">
 
           {/* Pop-out Logo */}
-          <Link href="/" className="relative flex items-center shrink-0 w-[120px] md:w-[200px] h-full z-50">
+          <Link href="/" className="relative flex items-center shrink-0 w-[80px] sm:w-[120px] md:w-[200px] h-full z-50">
             <img
               src="/images/logo.png"
               alt="Natvansh Logo"
-              className="absolute top-1/2 -translate-y-[49%] left-0 h-[140px] md:h-[240px] w-auto object-contain drop-shadow-[8px_8px_0_rgba(0,0,0,0.4)]"
+              className="absolute top-1/2 -translate-y-[49%] left-0 h-[70px] sm:h-[100px] md:h-[240px] w-auto object-contain drop-shadow-[2px_2px_0_rgba(0,0,0,0.4)] sm:drop-shadow-[4px_4px_0_rgba(0,0,0,0.4)] md:drop-shadow-[8px_8px_0_rgba(0,0,0,0.4)]"
             />
           </Link>
 
@@ -96,7 +96,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-80 z-[70] bg-black border-l-4 border-white overflow-hidden"
+              className="fixed top-0 right-0 bottom-0 w-[75vw] max-w-[320px] z-[70] bg-black border-l-4 border-white overflow-hidden"
             >
               <div className="flex flex-col h-full p-8 relative">
                 {/* Halftone BG inside menu */}

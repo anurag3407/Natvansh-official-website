@@ -59,6 +59,11 @@ export default function SplashScreen() {
       ease: "power4.inOut",
     });
 
+    return () => {
+      // Ensure scroll is restored on unmount (strict mode / user navigation)
+      document.body.style.overflow = "";
+      tl.kill();
+    };
   }, []);
 
   if (!isLoading) return null;
