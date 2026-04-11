@@ -119,6 +119,7 @@ export default function AdminContentPage() {
     hero: { label: "🎭 HERO SECTION", color: "var(--neon-pink)" },
     intro: { label: "✦ CLUB INTRODUCTION", color: "var(--neon-green)" },
     professor: { label: "📜 PROFESSOR'S MESSAGE", color: "var(--neon-yellow)" },
+    recent_events: { label: "🎪 RECENT EVENTS", color: "var(--neon-pink)" },
   };
 
   return (
@@ -168,7 +169,7 @@ export default function AdminContentPage() {
               <input className="w-full bg-black border-2 border-zinc-700 text-white px-3 py-2 font-inter focus:border-[var(--neon-yellow)] outline-none" value={section.image} onChange={(e) => updateSection(section.section, { image: e.target.value })} placeholder="Optional image URL" />
             </div>
 
-            {section.section === "intro" && (
+            {(section.section === "intro" || section.section === "recent_events") && (
               <div>
                 <label className="block text-xs font-inter font-bold mb-2 text-zinc-500 uppercase">Carousel Images</label>
                 <div className="flex gap-2 mb-3">

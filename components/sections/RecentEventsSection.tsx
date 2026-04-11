@@ -81,9 +81,9 @@ export default function RecentEventsSection() {
     >
       <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeading
-          accent={content?.metadata?.accent || "SPOTLIGHT"}
-          title={content?.title || "RECENT EVENTS"}
-          subtitle={content?.content || "Get a glimpse into our latest high-voltage productions."}
+          accent={content ? content.metadata?.accent : "SPOTLIGHT"}
+          title={content ? content.title : "RECENT EVENTS"}
+          subtitle={content ? content.content : "Get a glimpse into our latest high-voltage productions."}
         />
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mt-12 items-center">
@@ -106,14 +106,18 @@ export default function RecentEventsSection() {
                 modules={[EffectCoverflow, Pagination, Autoplay]}
                 className="overflow-hidden"
               >
-                {(content?.images?.length ? content.images : placeholderEvent.images).map((img: string, i: number) => (
+                {content ? 
+                  (content.images?.length ? content.images : []).map((img: string, i: number) => (
                   <SwiperSlide key={i}>
                     <div className="relative aspect-[16/10] overflow-hidden border-2 border-black bg-zinc-950 filter grayscale hover:grayscale-0 transition-all duration-300 flex items-center justify-center">
-                      <img
-                        src={img}
-                        alt={`Event photo ${i + 1}`}
-                        className="w-full h-full object-contain"
-                      />
+                      <img src={img} alt={`Event photo ${i + 1}`} className="w-full h-full object-contain" />
+                    </div>
+                  </SwiperSlide>
+                )) : 
+                placeholderEvent.images.map((img: string, i: number) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative aspect-[16/10] overflow-hidden border-2 border-black bg-zinc-950 filter grayscale hover:grayscale-0 transition-all duration-300 flex items-center justify-center">
+                      <img src={img} alt={`Event photo ${i + 1}`} className="w-full h-full object-contain" />
                     </div>
                   </SwiperSlide>
                 ))}
@@ -129,11 +133,11 @@ export default function RecentEventsSection() {
             </div>
 
             <h3 className="text-3xl sm:text-4xl md:text-6xl font-anton text-[var(--neon-yellow)] uppercase leading-none text-stroke-black drop-shadow-[4px_4px_0_#000]">
-              {content?.metadata?.eventTitle || placeholderEvent.title}
+              {content ? content.metadata?.eventTitle : placeholderEvent.title}
             </h3>
 
             <p className="text-sm md:text-lg font-bold font-inter text-white leading-relaxed">
-              {content?.metadata?.eventDescription || placeholderEvent.description}
+              {content ? content.metadata?.eventDescription : placeholderEvent.description}
             </p>
 
             <div className="space-y-4 pt-4 border-t-2 border-dashed border-zinc-600">
@@ -143,7 +147,7 @@ export default function RecentEventsSection() {
                 </div>
                 <div>
                   <p className="text-lg md:text-2xl font-anton text-white tracking-wider">
-                    {content?.metadata?.eventDate || placeholderEvent.date}
+                    {content ? content.metadata?.eventDate : placeholderEvent.date}
                   </p>
                 </div>
               </div>
@@ -153,7 +157,7 @@ export default function RecentEventsSection() {
                 </div>
                 <div>
                   <p className="text-lg md:text-2xl font-anton text-white tracking-wider">
-                    {content?.metadata?.eventVenue || placeholderEvent.venue}
+                    {content ? content.metadata?.eventVenue : placeholderEvent.venue}
                   </p>
                 </div>
               </div>
@@ -161,7 +165,7 @@ export default function RecentEventsSection() {
 
             <div className="pt-6">
               <Link href="/events" className="grunge-btn w-full">
-                {content?.metadata?.buttonText || "VIEW ALL EVENTS"} <ArrowRight size={24} className="ml-2" />
+                {content ? content.metadata?.buttonText : "VIEW ALL EVENTS"} <ArrowRight size={24} className="ml-2" />
               </Link>
             </div>
           </div>

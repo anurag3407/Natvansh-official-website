@@ -3,6 +3,8 @@ import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import SiteContent from "@/lib/models/SiteContent";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ section: string }> }
