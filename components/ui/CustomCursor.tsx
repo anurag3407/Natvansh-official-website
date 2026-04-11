@@ -13,27 +13,28 @@ export default function CustomCursor() {
     // Only run on devices with a fine pointer (like a mouse)
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
+    if (!pathname.startsWith("/admin")) {
+      document.body.classList.add("hide-system-cursor");
+    } else {
+      document.body.classList.remove("hide-system-cursor");
+    }
+
     const onMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setHidden(false);
     };
 
     window.addEventListener("mousemove", onMouseMove);
-    return () => window.removeEventListener("mousemove", onMouseMove);
-  }, []);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      document.body.classList.remove("hide-system-cursor");
+    };
+  }, [pathname]);
 
   if (pathname.startsWith("/admin")) return null;
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `
-        @media (pointer: fine) {
-          html, body, *, *::before, *::after, a, button, input, select, textarea, [role="button"] {
-            cursor: none !important;
-          }
-        }
-      ` }} />
-      
       {!hidden && (
         <motion.div
           className="fixed top-0 left-0 pointer-events-none z-[9999]"

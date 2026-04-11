@@ -70,6 +70,21 @@ body {
   max-width: 100vw;
 }
 
+@media (pointer: fine) {
+  .hide-system-cursor,
+  .hide-system-cursor *,
+  .hide-system-cursor *::before,
+  .hide-system-cursor *::after,
+  .hide-system-cursor a,
+  .hide-system-cursor button,
+  .hide-system-cursor input,
+  .hide-system-cursor select,
+  .hide-system-cursor textarea,
+  .hide-system-cursor [role="button"] {
+    cursor: none !important;
+  }
+}
+
 ::selection {
   background: var(--neon-pink);
   color: #fff;
