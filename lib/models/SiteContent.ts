@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface ISiteContent extends Document {
-  section: "hero" | "intro" | "professor" | "recent_events";
+  section: "hero" | "intro" | "professor" | "recent_events" | "notice";
   title: string;
   content: string;
   image: string;
@@ -14,7 +14,7 @@ const SiteContentSchema = new Schema<ISiteContent>(
   {
     section: {
       type: String,
-      enum: ["hero", "intro", "professor", "recent_events"],
+      enum: ["hero", "intro", "professor", "recent_events", "notice"],
       required: true,
       unique: true,
     },

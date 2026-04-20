@@ -1,17 +1,28 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Sparkles } from "lucide-react";
-import heroImage from "@/public/images/heroImage.png";
+import { Sparkles, Megaphone } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
   const container = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/content/notice")
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.error && data.content) {
+          setNotice(data.content);
+        }
+      })
+      .catch((err) => console.error("Failed to fetch notice", err));
+  }, []);
 
   useGSAP(
     () => {
@@ -53,44 +64,54 @@ export default function HeroSection() {
   return (
     <section
       ref={container}
-      className="relative min-h-[100dvh] w-full flex flex-col items-center overflow-hidden bg-[var(--neon-yellow)] bg-[url('/images/bg_grunge_red.png')] bg-cover bg-center pt-[18vh] sm:pt-[15vh] md:pt-[12vh] lg:pt-[14vh] md:justify-center"
+      className="relative min-h-[100dvh] w-full flex flex-col items-center overflow-hidden bg-[var(--neon-yellow)] bg-[url('/images/bg_grunge_red.png')] bg-cover bg-center pt-24 sm:pt-28 md:pt-32"
     >
       <div className="absolute inset-0 bg-white/70 halftone-overlay pointer-events-none mix-blend-overlay"></div>
 
       {/* Main Content Wrapper */}
       <div className="hero-content-wrapper relative z-10 w-full max-w-7xl mx-auto px-3 sm:px-4 flex flex-col items-center pb-8 sm:pb-12 overflow-hidden">
 
+        {notice && (
+          <div className="w-full max-w-3xl mb-4 sm:mb-6 bg-[#AD7DBB] border-2 md:border-3 border-black p-1.5 sm:p-2 shadow-[4px_4px_0_#000] md:shadow-[6px_6px_0_#000] transform -rotate-1 relative overflow-hidden flex items-center justify-center text-center mt-2">
+            <Megaphone size={16} className="text-black shrink-0 mr-2 animate-pulse" />
+            <span className="font-inter font-black text-xs sm:text-sm md:text-lg text-black uppercase tracking-widest break-words flex-1">
+              {notice}
+            </span>
+            <Megaphone size={20} className="text-black shrink-0 ml-3 animate-pulse" />
+          </div>
+        )}
+
         {/* Sanskrit Floating Badge */}
-        <div className="hero-badge flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-2 border-2 md:border-4 border-black bg-[var(--neon-pink)] mb-4 sm:mb-6 shadow-[3px_3px_0_#000] sm:shadow-[4px_4px_0_#000] md:shadow-[6px_6px_0_#000] rotate-[-3deg] hover:rotate-[3deg] transition-transform duration-300">
-          <Sparkles size={14} className="text-black shrink-0" />
-          <span className="font-anton tracking-widest text-black uppercase text-xs sm:text-sm md:text-lg whitespace-nowrap">
+        <div className="hero-badge flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 border-2 md:border-3 border-black bg-[var(--neon-cyan)] mb-3 sm:mb-4 shadow-[3px_3px_0_#000] sm:shadow-[4px_4px_0_#000] rotate-[-3deg] hover:rotate-[3deg] transition-transform duration-300">
+          <Sparkles size={12} className="text-black shrink-0" />
+          <span className="font-anton tracking-widest text-black uppercase text-xs sm:text-sm whitespace-nowrap">
             अस्ति कश्चित् विशेषः!
           </span>
-          <Sparkles size={14} className="text-black shrink-0" />
+          <Sparkles size={12} className="text-black shrink-0" />
         </div>
 
         {/* Masterpiece Title */}
         <h1
           ref={titleRef}
-          className="text-[18vw] sm:text-[16vw] md:text-[14vw] lg:text-[200px] font-anton leading-[0.8] tracking-widest mb-2 md:mb-6 flex overflow-visible text-[var(--neon-cyan)] drop-shadow-[3px_3px_0_#000] sm:drop-shadow-[6px_6px_0_#000] md:drop-shadow-[15px_15px_0_#000] stroke-black text-stroke-black"
+          className="text-[18vw] sm:text-[16vw] md:text-[14vw] lg:text-[180px] font-bebas leading-[0.85] tracking-tight mb-1 md:mb-2 flex overflow-visible text-white drop-shadow-[2px_2px_0_#000] sm:drop-shadow-[4px_4px_0_#000] md:drop-shadow-[10px_10px_0_#000] stroke-black text-stroke-black"
           style={{ WebkitTextStroke: "3px black", transform: "rotate(-2deg)" }}
         >
           {Array.from("NATVANSH").map((char, i) => (
-            <span key={i} className="hero-char inline-block" style={{ transform: i % 2 === 0 ? 'translateY(-4px)' : 'translateY(4px)' }}>
+            <span key={i} className="hero-char inline-block" style={{ transform: i % 2 === 0 ? 'translateY(-2px)' : 'translateY(2px)' }}>
               {char}
             </span>
           ))}
         </h1>
 
-        <h1 className="text-[4.5vw] sm:text-[4.5vw] lg:text-[55px] font-anton text-[var(--neon-yellow)] uppercase tracking-wider mb-4 sm:mb-6 text-stroke-black drop-shadow-[2px_2px_0_#000] sm:drop-shadow-[4px_4px_0_#000] md:drop-shadow-[6px_6px_0_#000] rotate-[2deg] bg-black px-3 py-1 sm:px-4 md:px-6 md:py-1.5 border-2 md:border-4 border-black">
+        <h1 className="text-[4.5vw] sm:text-[4.5vw] lg:text-[40px] font-anton text-[var(--neon-yellow)] uppercase tracking-wider mb-4 sm:mb-6 text-stroke-black drop-shadow-[2px_2px_0_#000] sm:drop-shadow-[4px_4px_0_#000] rotate-[2deg] bg-black px-3 py-1 sm:px-4 md:px-5 md:py-1 border-2 md:border-3 border-black">
           Drama & Film Club
         </h1>
 
-        <div className="hero-subtitle bg-[#B27DC2] border-2 md:border-4 border-black p-3 sm:p-4 md:p-5 shadow-[4px_4px_0_var(--neon-pink)] sm:shadow-[6px_6px_0_var(--neon-pink)] md:shadow-[8px_8px_0_var(--neon-pink)] transform -rotate-1 max-w-xl w-full text-center mb-6 sm:mb-10">
-          <p className="text-sm sm:text-base md:text-xl text-black font-inter font-black leading-relaxed">
+        <div className="hero-subtitle bg-[#AD7DBB] border-2 md:border-3 border-black p-2 sm:p-3 shadow-[4px_4px_0_var(--neon-yellow)] transform -rotate-1 max-w-sm w-full text-center mb-6 sm:mb-8 mx-auto">
+          <p className="text-xs sm:text-sm md:text-base text-black font-anton tracking-wider uppercase leading-snug">
             Where every emotion finds its stage and every story finds its screen.
           </p>
-          <span className="text-black bg-white inline-block px-2 py-0.5 sm:px-3 sm:py-1 border-2 border-black font-anton tracking-widest text-xs sm:text-sm md:text-base mt-2 sm:mt-3 uppercase shadow-[3px_3px_0_#000] sm:shadow-[4px_4px_0_#000] rotate-2">
+          <span className="text-black bg-white inline-block px-1.5 py-0.5 sm:px-2 border border-black font-anton tracking-widest text-[10px] sm:text-xs mt-1.5 sm:mt-2 uppercase shadow-[2px_2px_0_#000] rotate-2">
             NIT PATNA
           </span>
         </div>

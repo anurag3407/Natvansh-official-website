@@ -48,6 +48,7 @@
   --font-inter: var(--font-inter);
   --font-anton: var(--font-anton);
   --font-bebas: var(--font-bebas-neue);
+  --font-cinzel: var(--font-cinzel);
 }
 
 /* --- Global Base --- */
@@ -106,6 +107,7 @@ body {
 /* --- Typography Utilities --- */
 .font-anton { font-family: var(--font-anton), sans-serif; letter-spacing: 0.05em; }
 .font-bebas { font-family: var(--font-bebas-neue), sans-serif; letter-spacing: 0.05em; }
+.font-cinzel { font-family: var(--font-cinzel), serif; letter-spacing: 0.05em; }
 
 .text-stroke-black {
   -webkit-text-stroke: 1.5px black;

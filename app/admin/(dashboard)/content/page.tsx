@@ -55,6 +55,13 @@ const defaultContent: ContentSection[] = [
       eventVenue: "CULTURAL COMPLEX"
     },
   },
+  {
+    section: "notice",
+    title: "NOTICE",
+    content: "Welcome to Natvansh. Stay tuned for upcoming auditions!",
+    image: "",
+    metadata: {},
+  },
 ];
 
 export default function AdminContentPage() {
@@ -120,6 +127,7 @@ export default function AdminContentPage() {
     intro: { label: "✦ CLUB INTRODUCTION", color: "var(--neon-green)" },
     professor: { label: "📜 PROFESSOR'S MESSAGE", color: "var(--neon-yellow)" },
     recent_events: { label: "🎪 RECENT EVENTS", color: "var(--neon-pink)" },
+    notice: { label: "📢 GLOBAL NOTICE STRIP", color: "var(--neon-cyan)" },
   };
 
   return (

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Anton, Bebas_Neue } from "next/font/google";
+import { Inter, Anton, Bebas_Neue, Cinzel } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
@@ -20,6 +20,13 @@ const anton = Anton({
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
   weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
+  weight: ["400", "700", "900"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -57,7 +64,7 @@ export default function RootLayout({
       <html
         lang="en"
         data-theme="dark"
-        className={`${inter.variable} ${anton.variable} ${bebasNeue.variable}`}
+        className={`${inter.variable} ${anton.variable} ${bebasNeue.variable} ${cinzel.variable}`}
         suppressHydrationWarning
       >
         <body className="min-h-screen antialiased">

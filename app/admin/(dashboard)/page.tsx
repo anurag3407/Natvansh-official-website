@@ -1,14 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Calendar, Users, FileText, Code2, Activity, Images } from "lucide-react";
+import { Calendar, Users, FileText, Code2, Activity, Images, GraduationCap, History } from "lucide-react";
 import Link from "next/link";
 
 const quickActions = [
   { title: "Events", description: "Drama festivals, workshops, competitions", icon: Calendar, href: "/admin/events", color: "var(--neon-pink)" },
   { title: "Team", description: "Team members and post bearers", icon: Users, href: "/admin/team", color: "var(--neon-green)" },
-  { title: "Content", description: "Hero, intro, professor sections", icon: FileText, href: "/admin/content", color: "var(--neon-yellow)" },
-  { title: "Developers", description: "Developer profiles", icon: Code2, href: "/admin/developers", color: "var(--neon-cyan)" },
+  { title: "Alumni", description: "Alumni network", icon: History, href: "/admin/alumni", color: "var(--neon-cyan)" },
+  { title: "Professors", description: "Manage professor incharges", icon: GraduationCap, href: "/admin/professors", color: "var(--neon-yellow)" },
+  { title: "Content", description: "Hero, intro, professor sections", icon: FileText, href: "/admin/content", color: "var(--neon-cyan)" },
+  { title: "Developers", description: "Developer profiles", icon: Code2, href: "/admin/developers", color: "var(--neon-yellow)" },
   { title: "Gallery", description: "Gallery images", icon: Images, href: "/admin/gallery", color: "var(--neon-pink)" },
 ];
 
@@ -18,15 +20,19 @@ export default function AdminDashboard() {
   useEffect(() => {
     async function fetchCounts() {
       try {
-        const [events, team, devs, gallery] = await Promise.all([
+        const [events, team, devs, gallery, profs, alumni] = await Promise.all([
           fetch("/api/events").then(r => r.ok ? r.json() : []),
           fetch("/api/team").then(r => r.ok ? r.json() : []),
           fetch("/api/developers").then(r => r.ok ? r.json() : []),
           fetch("/api/gallery").then(r => r.ok ? r.json() : []),
+          fetch("/api/professors").then(r => r.ok ? r.json() : []),
+          fetch("/api/alumni").then(r => r.ok ? r.json() : []),
         ]);
         setCounts({
           Events: events.length,
           Team: team.length,
+          Alumni: alumni.length,
+          Professors: profs.length,
           Developers: devs.length,
           Gallery: gallery.length,
           Content: 3,

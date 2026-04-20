@@ -11,12 +11,16 @@ import {
   Code2,
   ChevronLeft,
   Images,
+  GraduationCap,
+  History,
 } from "lucide-react";
 
 const adminLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/events", label: "Events", icon: Calendar },
   { href: "/admin/team", label: "Team", icon: Users },
+  { href: "/admin/alumni", label: "Alumni", icon: History },
+  { href: "/admin/professors", label: "Professors", icon: GraduationCap },
   { href: "/admin/content", label: "Content", icon: FileText },
   { href: "/admin/developers", label: "Developers", icon: Code2 },
   { href: "/admin/gallery", label: "Gallery", icon: Images },
