@@ -21,6 +21,7 @@ interface ProfessorData {
   designation: string;
   department: string;
   image: string;
+  message?: string;
 }
 
 export default function ProfessorSection() {
