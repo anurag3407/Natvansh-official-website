@@ -51,11 +51,12 @@ const DevCard = ({ dev }: { dev: DevItem }) => {
 
   return (
     <div className="bg-[#050505] rounded-[1.5rem] overflow-hidden border-2 border-[var(--neon-purple)] group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(255,0,255,0.4)] flex flex-col h-full mx-auto w-full max-w-[340px]">
-      <div className="relative h-60 w-full bg-[url('/images/card_doodle_bg_alt.png')] bg-cover bg-center overflow-hidden flex items-end justify-center">
+      <div className="relative h-60 w-full bg-[url('/images/card_doodle_bg_alt.webp')] bg-cover bg-center overflow-hidden flex items-end justify-center">
         <div className="absolute inset-0 bg-black/40 mix-blend-multiply rounded-t-[1.5rem]"></div>
         <img 
           src={dev.image || fallbackImage} 
           alt={dev.name} 
+          loading="lazy"
           className="relative z-10 w-full h-[90%] object-cover object-top mask-image-bottom drop-shadow-[0_0_12px_rgba(255,255,255,0.8)] filter contrast-125 saturate-150 grayscale hover:grayscale-0 transition-all duration-500 ease-in-out cursor-pointer"
           style={{ transform: transformStyle }}
         />
@@ -149,7 +150,7 @@ export default function DevelopersPage() {
       <Navbar />
       <main ref={container} className="min-h-screen pt-28 bg-black">
         {/* Header */}
-        <section className="section-padding bg-[url('/images/bg_grunge_purple.png')] bg-cover halftone-overlay pb-12 overflow-hidden relative border-b-8 border-white">
+        <section className="section-padding bg-[url('/images/bg_grunge_purple.webp')] bg-cover halftone-overlay pb-12 overflow-hidden relative border-b-8 border-white">
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 relative z-10">
             <div className="flex-1">
               <SectionHeading
@@ -160,7 +161,7 @@ export default function DevelopersPage() {
             </div>
             <div className="flex-1 w-full max-w-md mx-auto hidden lg:block transform rotate-2 hover:rotate-0 transition-transform duration-500">
               <div className="border-4 border-black p-2 bg-[var(--neon-pink)] shadow-[10px_10px_0_#000]">
-                <img src="/images/team_doodle.png" alt="Dev Team Doodle" className="w-full h-auto border-4 border-black filter contrast-125" />
+                <img src="/images/team_doodle.webp" alt="Dev Team Doodle" loading="lazy" className="w-full h-auto border-4 border-black filter contrast-125" />
               </div>
             </div>
           </div>
@@ -178,7 +179,7 @@ export default function DevelopersPage() {
         </section>
 
         {/* Tech Stack */}
-        <section className="px-4 sm:px-6 lg:px-8 py-24 bg-[url('/images/bg_grunge_red.png')] bg-cover halftone-overlay relative">
+        <section className="px-4 sm:px-6 lg:px-8 py-24 bg-[url('/images/bg_grunge_red.webp')] bg-cover halftone-overlay relative">
           <div className="max-w-4xl mx-auto text-center relative z-10 bg-black p-10 border-4 border-black shadow-[15px_15px_0_var(--neon-yellow)] transform -rotate-1">
             <h3 className="text-5xl font-anton uppercase text-white mb-4 text-stroke-black drop-shadow-[3px_3px_0_#000]">
               Built With

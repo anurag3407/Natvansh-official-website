@@ -50,11 +50,12 @@ const TeamCard = ({ person }: { person: TeamMember }) => {
 
   return (
     <div className="bg-[#050505] rounded-[1.5rem] overflow-hidden border border-zinc-900 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(255,100,50,0.3)] flex flex-col h-full mx-auto w-full max-w-[320px]">
-      <div className="relative h-60 w-full bg-[url('/images/card_doodle_bg.png')] bg-cover bg-center overflow-hidden flex items-end justify-center">
+      <div className="relative h-60 w-full bg-[url('/images/card_doodle_bg.webp')] bg-cover bg-center overflow-hidden flex items-end justify-center">
         <div className="absolute inset-0 bg-black/10 mix-blend-multiply rounded-t-[1.5rem]"></div>
         <img
           src={person.image || fallbackImage}
           alt={person.name}
+          loading="lazy"
           className="relative z-10 w-full h-[90%] object-cover object-top mask-image-bottom drop-shadow-[0_0_12px_rgba(255,255,255,0.75)] filter contrast-125 transition-transform duration-500 ease-in-out"
           style={{ transform: transformStyle }}
         />
@@ -140,9 +141,9 @@ export default function TeamPage() {
   );
 
   const teamSections = [
-    { name: "CREATIVE TEAM", members: creativeTeam, bg: "bg-[url('/images/bg_grunge_purple.png')]" },
-    { name: "TECHNICAL TEAM", members: technicalTeam, bg: "bg-[url('/images/bg_dark_texture.png')]" },
-    ...(managementTeam.length > 0 ? [{ name: "MANAGEMENT TEAM", members: managementTeam, bg: "bg-[url('/images/bg_grunge_red.png')]" }] : []),
+    { name: "CREATIVE TEAM", members: creativeTeam, bg: "bg-[url('/images/bg_grunge_purple.webp')]" },
+    { name: "TECHNICAL TEAM", members: technicalTeam, bg: "bg-[url('/images/bg_dark_texture.webp')]" },
+    ...(managementTeam.length > 0 ? [{ name: "MANAGEMENT TEAM", members: managementTeam, bg: "bg-[url('/images/bg_grunge_red.webp')]" }] : []),
   ];
 
   return (
@@ -163,7 +164,7 @@ export default function TeamPage() {
         </section>
 
         {/* Post Bearers */}
-        <section className="px-4 sm:px-6 lg:px-8 py-20 bg-[url('/images/bg_grunge_red.png')] bg-cover halftone-overlay relative">
+        <section className="px-4 sm:px-6 lg:px-8 py-20 bg-[url('/images/bg_grunge_red.webp')] bg-cover halftone-overlay relative">
           <div className="max-w-6xl mx-auto relative z-10">
             <h3 className="text-4xl md:text-5xl border-b-4 border-black pb-2 font-anton text-left mb-12 text-white uppercase">
               POST BEARERS

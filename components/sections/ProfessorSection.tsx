@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { Quote } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -138,9 +139,11 @@ export default function ProfessorSection() {
                 <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6" style={{ borderTop: "4px dashed #333" }}>
                   <div className={`relative w-24 h-24 sm:w-28 sm:h-28 shrink-0 transform ${i % 2 === 0 ? '-rotate-3' : 'rotate-2'} hover:rotate-0 transition-transform`}>
                     <div className="absolute inset-0 bg-[var(--neon-pink)] border-2 sm:border-3 border-black shadow-[4px_4px_0_#000] rotate-6"></div>
-                    <img 
-                      src={prof.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop"} 
-                      alt={prof.name} 
+                    <Image
+                      src={prof.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop"}
+                      alt={prof.name}
+                      width={112}
+                      height={112}
                       className="relative z-10 w-full h-full object-cover border-2 sm:border-3 border-black shadow-[3px_3px_0_#000] filter grayscale hover:grayscale-0 transition-all duration-500"
                     />
                     <div className={`absolute top-[-6px] ${i % 2 === 0 ? 'right-[-6px]' : 'left-[-6px]'} w-8 h-3 ${i % 2 === 0 ? "bg-[var(--neon-yellow)]" : "bg-[var(--neon-green)]"} border-2 border-black rotate-12 z-20`}></div>

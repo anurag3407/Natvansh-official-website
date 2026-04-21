@@ -9,10 +9,10 @@ import Footer from "@/components/ui/Footer";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProfessorSection from "@/components/sections/ProfessorSection";
-import { Calendar, MapPin, ArrowRight } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
-import Link from "next/link";
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -116,7 +116,7 @@ export default function EventsPage() {
       <Navbar />
       <main ref={container} className="min-h-screen pt-[60px] sm:pt-[10vh] md:pt-[12vh] bg-black">
         {/* Hero Banner */}
-        <section className="section-padding bg-[url('/images/bg_grunge_red.png')] bg-cover halftone-overlay pb-12 border-b-8 border-white">
+        <section className="section-padding bg-[url('/images/bg_grunge_red.webp')] bg-cover halftone-overlay pb-12 border-b-8 border-white">
           <div className="max-w-6xl mx-auto relative z-10 flex flex-col md:flex-row items-center gap-12">
             <div className="flex-1">
               <SectionHeading
@@ -127,7 +127,7 @@ export default function EventsPage() {
             </div>
             <div className="flex-1 w-full max-w-md mx-auto hidden md:block transform -rotate-2 hover:rotate-2 transition-transform duration-500">
               <div className="border-4 border-black p-2 bg-[var(--neon-green)] shadow-[10px_10px_0_#000]">
-                <img src="/images/hero_drama_doodle.png" alt="Drama Events" className="w-full h-auto border-4 border-black" />
+                <Image src="/images/hero_drama_doodle.webp" alt="Drama Events" width={600} height={400} className="w-full h-auto border-4 border-black" />
               </div>
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function EventsPage() {
         </section>
 
         {/* Alternating Events Layout */}
-        <section className="px-4 sm:px-6 lg:px-8 py-20 bg-[url('/images/bg_grunge_purple.png')] bg-cover halftone-overlay relative">
+        <section className="px-4 sm:px-6 lg:px-8 py-20 bg-[url('/images/bg_grunge_purple.webp')] bg-cover halftone-overlay relative">
           <div className="max-w-7xl mx-auto relative z-10 space-y-24">
             {events.map((event, index) => {
               const isEven = index % 2 === 0;
@@ -173,7 +173,7 @@ export default function EventsPage() {
                       {event.images.map((img, i) => (
                         <SwiperSlide key={i}>
                           <div className="relative aspect-[16/10] overflow-hidden border-2 border-black bg-zinc-950 filter grayscale hover:grayscale-0 transition-all duration-500 flex items-center justify-center">
-                            <img src={img} alt={`${event.title} photo ${i + 1}`} className="w-full h-full object-contain" />
+                            <img src={img} alt={`${event.title} photo ${i + 1}`} loading="lazy" className="w-full h-full object-contain" />
                           </div>
                         </SwiperSlide>
                       ))}

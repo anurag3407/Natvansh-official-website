@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import SiteContent from "@/lib/models/SiteContent";
-
-export const dynamic = "force-dynamic";
+import { cachedFetch, invalidateCache, invalidateCacheByPrefix, CACHE_TTL } from "@/lib/cache";
 
 export async function GET(
   request: NextRequest,
@@ -11,12 +10,28 @@ export async function GET(
 ) {
   try {
     const { section } = await params;
-    await dbConnect();
-    const content = await SiteContent.findOne({ section });
-    if (!content) return NextResponse.json({ error: "Content not found" }, { status: 404 });
-    return NextResponse.json(content);
-  } catch (error: any) { console.error("API error:", error);
-    return NextResponse.json({ error: "Failed to fetch content" , details: error.message }, { status: 500 });
+    const cacheKey = `content:${section}`;
+
+    const content = await cachedFetch(
+      cacheKey,
+      async () => {
+        await dbConnect();
+        return SiteContent.findOne({ section }).lean();
+      },
+      CACHE_TTL.MEDIUM
+    );
+
+    if (!content) {
+      return NextResponse.json({ error: "Content not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(content, {
+      headers: { "Cache-Control": "s-maxage=600, stale-while-revalidate=1200" },
+    });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error("API error:", message);
+    return NextResponse.json({ error: "Failed to fetch content", details: message }, { status: 500 });
   }
 }
 
@@ -36,8 +51,15 @@ export async function PUT(
       { ...body, section },
       { new: true, upsert: true }
     );
+
+    // Invalidate both the specific section cache and the "all content" cache
+    await invalidateCache(`content:${section}`);
+    await invalidateCache("content:all");
+
     return NextResponse.json(content);
-  } catch (error: any) { console.error("API error:", error);
-    return NextResponse.json({ error: "Failed to update content" , details: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error("API error:", message);
+    return NextResponse.json({ error: "Failed to update content", details: message }, { status: 500 });
   }
 }

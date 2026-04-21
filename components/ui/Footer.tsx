@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, Heart } from "lucide-react";
+import Image from "next/image";
+import { Mail } from "lucide-react";
 import { IconInstagram, IconYoutube } from "@/components/ui/SocialIcons";
 
 const socialLinks = [
@@ -12,7 +13,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[url('/images/nav_footer_bg.png')] bg-cover bg-center border-t-4 sm:border-t-8 border-white overflow-hidden py-8 sm:py-12">
+    <footer className="relative bg-[url('/images/nav_footer_bg.webp')] bg-cover bg-center border-t-4 sm:border-t-8 border-white overflow-hidden py-8 sm:py-12">
       <div className="absolute inset-0 bg-black/60 halftone-overlay opacity-50 pointer-events-none"></div>
 
       <div className="w-full max-w-[100vw] mx-auto px-0 relative z-10">
@@ -21,9 +22,11 @@ export default function Footer() {
           {/* LEFT: Branding */}
           <div className="flex flex-col items-start shrink-0">
             <Link href="/" className="flex items-center ml-0 pl-1 sm:pl-3">
-              <img
-                src="/images/logo.png"
+              <Image
+                src="/images/logo.webp"
                 alt="Natvansh Logo"
+                width={128}
+                height={128}
                 className="h-16 sm:h-24 md:h-32 w-auto object-contain"
               />
             </Link>

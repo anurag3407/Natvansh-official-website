@@ -33,11 +33,12 @@ const AlumniCard = ({ person }: { person: AlumniData }) => {
 
   return (
     <div className="bg-[#050505] rounded-[1.5rem] overflow-hidden border border-zinc-900 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(200,200,200,0.3)] flex flex-col h-full mx-auto w-full max-w-[320px]">
-      <div className="relative h-60 w-full bg-[url('/images/card_doodle_bg.png')] bg-cover bg-center overflow-hidden flex items-end justify-center">
+      <div className="relative h-60 w-full bg-[url('/images/card_doodle_bg.webp')] bg-cover bg-center overflow-hidden flex items-end justify-center">
         <div className="absolute inset-0 bg-black/10 mix-blend-multiply rounded-t-[1.5rem]"></div>
         <img
           src={person.image || fallbackImage}
           alt={person.name}
+          loading="lazy"
           className="relative z-10 w-full h-[90%] object-cover object-top mask-image-bottom drop-shadow-[0_0_12px_rgba(255,255,255,0.75)] filter contrast-125 grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out"
           style={{ transform: transformStyle }}
         />
@@ -138,7 +139,7 @@ export default function AlumniPage() {
           batches.map((batch, index) => (
             <section
               key={batch}
-              className={`px-4 sm:px-6 lg:px-8 py-20 relative ${index % 2 === 0 ? "bg-[url('/images/bg_dark_texture.png')]" : "bg-[url('/images/bg_grunge_purple.png')]"} bg-cover halftone-overlay border-b-8 border-black`}
+              className={`px-4 sm:px-6 lg:px-8 py-20 relative ${index % 2 === 0 ? "bg-[url('/images/bg_dark_texture.webp')]" : "bg-[url('/images/bg_grunge_purple.webp')]"} bg-cover halftone-overlay border-b-8 border-black`}
             >
               <div className="max-w-6xl mx-auto relative z-10">
                 <h3 className="text-4xl md:text-5xl font-anton mb-12 text-left text-white border-b-4 border-[var(--neon-cyan)] pb-2 inline-block">

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -32,7 +33,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-3 sm:border-b-4 border-black bg-[url('/images/nav_footer_bg.png')] bg-cover bg-center h-[60px] sm:h-[10vh] md:h-[12vh] flex items-center ${isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-3 sm:border-b-4 border-black bg-[url('/images/nav_footer_bg.webp')] bg-cover bg-center h-[60px] sm:h-[10vh] md:h-[12vh] flex items-center ${isScrolled
           ? "shadow-[0_5px_0_0_#FFF]"
           : ""
           }`}
@@ -42,9 +43,12 @@ export default function Navbar() {
 
           {/* Pop-out Logo */}
           <Link href="/" className="relative flex items-center shrink-0 w-[110px] sm:w-[140px] md:w-[200px] h-full z-50 ml-0 pl-1 sm:pl-3">
-            <img
-              src="/images/logo.png"
+            <Image
+              src="/images/logo.webp"
               alt="Natvansh Logo"
+              width={240}
+              height={240}
+              priority
               className="absolute top-1/2 -translate-y-[49%] left-0 h-[95px] sm:h-[120px] md:h-[240px] w-auto object-contain drop-shadow-[2px_2px_0_rgba(0,0,0,0.4)] sm:drop-shadow-[4px_4px_0_rgba(0,0,0,0.4)] md:drop-shadow-[8px_8px_0_rgba(0,0,0,0.4)]"
             />
           </Link>
@@ -145,4 +149,3 @@ export default function Navbar() {
     </>
   );
 }
-

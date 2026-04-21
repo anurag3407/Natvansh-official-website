@@ -43,6 +43,14 @@ export const metadata: Metadata = {
   description: "नटवंश — अस्ति कश्चित् विशेषः! The official Drama & Film Club of National Institute of Technology, Patna. Where stories come alive on stage and screen.",
   keywords: ["Natvansh", "NIT Patna", "Drama Club", "Film Club", "Theater", "Nukkad Natak", "नटवंश"],
   authors: [{ name: "Natvansh Tech Team" }],
+  icons: {
+    icon: [
+      { url: "/icon.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "Natvansh — Drama & Film Club",
     description: "The official stage and screen society of NIT Patna. We discover raw talent and perform stories that mirror society.",
@@ -50,11 +58,20 @@ export const metadata: Metadata = {
     siteName: "Natvansh NIT Patna",
     locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Natvansh — Drama & Film Club | NIT Patna",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Natvansh — Drama & Film Club",
     description: "The official stage and screen society of NIT Patna.",
+    images: ["/opengraph-image.jpg"],
   },
   robots: {
     index: true,

@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 
 export default function SplashScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const splashRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLImageElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const loaderRef = useRef<HTMLDivElement>(null);
 
@@ -74,21 +75,23 @@ export default function SplashScreen() {
       className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black overflow-hidden"
     >
       {/* Background Textures */}
-      <div className="absolute inset-0 bg-[url('/images/bg_grunge_purple.png')] bg-cover opacity-50 mix-blend-screen pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url('/images/bg_grunge_purple.webp')] bg-cover opacity-50 mix-blend-screen pointer-events-none"></div>
       <div className="absolute inset-0 halftone-overlay pointer-events-none"></div>
       
       {/* Cinematic Vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] pointer-events-none"></div>
 
       <div className="relative z-10 flex flex-col items-center">
-        <div className="relative">
+        <div className="relative" ref={logoRef}>
             {/* Pulsing glow behind logo */}
             <div className="absolute inset-0 bg-[var(--neon-pink)] blur-[50px] opacity-30 mix-blend-screen rounded-full animate-pulse"></div>
-            <img
-            ref={logoRef}
-            src="/images/logo.png"
-            alt="Natvansh"
-            className="w-40 sm:w-56 h-auto object-contain drop-shadow-[0_0_20px_rgba(255,100,200,0.5)] transform-origin-center relative z-10"
+            <Image
+              src="/images/logo.webp"
+              alt="Natvansh"
+              width={224}
+              height={224}
+              priority
+              className="w-40 sm:w-56 h-auto object-contain drop-shadow-[0_0_20px_rgba(255,100,200,0.5)] transform-origin-center relative z-10"
             />
         </div>
 

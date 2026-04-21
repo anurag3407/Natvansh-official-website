@@ -70,7 +70,7 @@ export default function GalleryPage() {
       <Navbar />
       <main ref={container} className="min-h-screen pt-[60px] sm:pt-[10vh] md:pt-[12vh] bg-black">
         {/* Header */}
-        <section className="section-padding bg-[url('/images/bg_grunge_red.png')] bg-cover halftone-overlay pb-12 border-b-8 border-white">
+        <section className="section-padding bg-[url('/images/bg_grunge_red.webp')] bg-cover halftone-overlay pb-12 border-b-8 border-white">
           <div className="max-w-6xl mx-auto relative z-10 flex flex-col items-center justify-center text-center">
             <h1 className="text-6xl md:text-8xl font-anton uppercase text-white tracking-wide drop-shadow-[5px_5px_0_var(--neon-green)] mb-6 transform -rotate-1">
               THE GALLERY
@@ -93,6 +93,7 @@ export default function GalleryPage() {
                 <img 
                   src={image.image} 
                   alt={image.title} 
+                  loading="lazy"
                   className="w-full h-auto object-cover filter grayscale hover:grayscale-0 transition-all duration-500" 
                 />
                 
@@ -112,7 +113,7 @@ export default function GalleryPage() {
         </section>
 
         {/* Call to Action */}
-        <section className="py-24 bg-[url('/images/bg_grunge_purple.png')] bg-cover halftone-overlay border-t-8 border-white text-center">
+        <section className="py-24 bg-[url('/images/bg_grunge_purple.webp')] bg-cover halftone-overlay border-t-8 border-white text-center">
             <h2 className="text-5xl md:text-7xl font-anton text-white tracking-widest uppercase mb-8 drop-shadow-[4px_4px_0_#000]">
                 WANT TO BE IN THE FRAME?
             </h2>

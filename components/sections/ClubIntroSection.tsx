@@ -118,6 +118,7 @@ export default function ClubIntroSection() {
                     <img
                         src={src}
                         alt={`Club activity ${i + 1}`}
+                        loading="lazy"
                         className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
                     />
                     {/* Decorative tape on photos */}

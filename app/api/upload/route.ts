@@ -8,6 +8,9 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/svg+xml"];
+
 export async function POST(request: NextRequest) {
   try {
     const { userId } = await auth();
@@ -20,6 +23,22 @@ export async function POST(request: NextRequest) {
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
+    }
+
+    // Validate file size
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        { error: `File too large. Maximum size is ${MAX_FILE_SIZE / 1024 / 1024} MB` },
+        { status: 400 }
+      );
+    }
+
+    // Validate file type
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      return NextResponse.json(
+        { error: `Invalid file type. Allowed: ${ALLOWED_TYPES.join(", ")}` },
+        { status: 400 }
+      );
     }
 
     const bytes = await file.arrayBuffer();
@@ -46,8 +65,9 @@ export async function POST(request: NextRequest) {
       url: result.secure_url,
       publicId: result.public_id,
     });
-  } catch (error: any) {
-    console.error("Upload error:", error);
-    return NextResponse.json({ error: "Failed to upload" , details: error?.message || "Unknown error" }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error("Upload error:", message);
+    return NextResponse.json({ error: "Failed to upload", details: message }, { status: 500 });
   }
 }

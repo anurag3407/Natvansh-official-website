@@ -28,6 +28,7 @@ const ProfCard = ({ prof }: { prof: ProfessorData }) => {
         <img
           src={prof.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop"}
           alt={prof.name}
+          loading="lazy"
           className="relative z-10 w-full h-full object-cover object-top mask-image-bottom drop-shadow-[0_0_12px_rgba(255,255,255,0.2)] filter contrast-125 grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out"
         />
         {prof.isCurrent ? (
@@ -115,7 +116,7 @@ export default function ProfessorsPage() {
         </section>
 
         {currentProfs.length > 0 && (
-          <section className="px-4 sm:px-6 lg:px-8 py-20 bg-[url('/images/bg_dark_texture.png')] bg-cover halftone-overlay relative">
+          <section className="px-4 sm:px-6 lg:px-8 py-20 bg-[url('/images/bg_dark_texture.webp')] bg-cover halftone-overlay relative">
             <div className="max-w-6xl mx-auto relative z-10">
               <h3 className="text-4xl md:text-5xl border-b-4 border-[var(--neon-green)] pb-2 font-anton text-left mb-12 text-white uppercase inline-block">
                 CURRENT FACULTY
@@ -132,7 +133,7 @@ export default function ProfessorsPage() {
         )}
 
         {pastProfs.length > 0 && (
-          <section className="px-4 sm:px-6 lg:px-8 py-20 bg-[url('/images/bg_grunge_purple.png')] bg-cover halftone-overlay relative border-t-8 border-black">
+          <section className="px-4 sm:px-6 lg:px-8 py-20 bg-[url('/images/bg_grunge_purple.webp')] bg-cover halftone-overlay relative border-t-8 border-black">
             <div className="max-w-6xl mx-auto relative z-10">
               <h3 className="text-4xl md:text-5xl font-anton mb-12 text-left text-white border-b-4 border-white pb-2 inline-block">
                 PREVIOUS P.I.S
