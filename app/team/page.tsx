@@ -141,9 +141,8 @@ export default function TeamPage() {
   );
 
   const teamSections = [
-    { name: "CREATIVE TEAM", members: creativeTeam, bg: "bg-[url('/images/bg_grunge_purple.webp')]" },
-    { name: "TECHNICAL TEAM", members: technicalTeam, bg: "bg-[url('/images/bg_dark_texture.webp')]" },
-    ...(managementTeam.length > 0 ? [{ name: "MANAGEMENT TEAM", members: managementTeam, bg: "bg-[url('/images/bg_grunge_red.webp')]" }] : []),
+    { name: "SENIOR MEMBERS", members: creativeTeam, bg: "bg-[url('/images/bg_grunge_purple.webp')]" },
+    ...(managementTeam.length > 0 ? [{ name: "JUNIOR MEMBERS", members: managementTeam, bg: "bg-[url('/images/bg_grunge_red.webp')]" }] : []),
   ];
 
   return (

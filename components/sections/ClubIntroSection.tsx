@@ -94,10 +94,12 @@ export default function ClubIntroSection() {
               Our culture is fueled by passion, rebellion, and an unyielding belief that
               <span className="font-anton uppercase text-base sm:text-xl md:text-3xl mt-2 sm:mt-4 bg-[var(--neon-pink)] text-black px-1.5 sm:px-2 py-0.5 sm:py-1 inline-block -rotate-2 border-2 border-black"> every story must be told loud </span>
             </p>
-            <div className="inline-block px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4 border-2 sm:border-3 md:border-4 border-black bg-[var(--neon-yellow)] transform -rotate-2 shadow-[3px_3px_0_#000] md:shadow-[4px_4px_0_#000]">
-              <p className="font-anton text-sm sm:text-lg md:text-2xl text-black uppercase">
-                &quot;THERE IS SOMETHING SPECIAL!&quot;
-              </p>
+            <div className="flex flex-col gap-3 sm:gap-4 mt-4">
+              <div className="inline-block px-3 py-2 sm:px-4 sm:py-3 border-2 md:border-4 border-black bg-[var(--neon-yellow)] transform -rotate-2 shadow-[4px_4px_0_#000]">
+                <p className="font-anton text-sm sm:text-lg md:text-2xl text-black uppercase tracking-wide">
+                  &quot;THERE IS SOMETHING SPECIAL!&quot;
+                </p>
+              </div>
             </div>
           </div>
 

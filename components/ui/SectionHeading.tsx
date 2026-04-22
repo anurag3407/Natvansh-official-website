@@ -91,11 +91,13 @@ export default function SectionHeading({
         {title}
       </h2>
       {subtitle && (
-        <p
-          className="section-subtitle text-xs sm:text-sm md:text-base lg:text-lg max-w-2xl font-inter font-bold text-zinc-300"
-        >
-          {subtitle}
-        </p>
+        <div className="section-subtitle mt-1 sm:mt-2">
+          <p
+            className="text-xs sm:text-sm md:text-base lg:text-lg max-w-2xl font-inter font-bold text-white bg-black px-3 py-2 sm:px-4 sm:py-3 border-2 md:border-3 border-black shadow-[3px_3px_0_var(--neon-pink)] sm:shadow-[4px_4px_0_var(--neon-pink)] transform -rotate-1 inline-block"
+          >
+            {subtitle}
+          </p>
+        </div>
       )}
       <div
         className="section-line h-1 w-16 sm:w-20 mt-1 sm:mt-2 bg-[var(--neon-yellow)] border border-black"

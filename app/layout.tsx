@@ -16,12 +16,9 @@ export const metadata: Metadata = {
   keywords: ["Natvansh", "NIT Patna", "Drama Club", "Film Club", "Theater", "Nukkad Natak", "नटवंश"],
   authors: [{ name: "Natvansh Tech Team" }],
   icons: {
-    icon: [
-      { url: "/icon.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
-    ],
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/apple-icon.png",
   },
   openGraph: {
     title: "Natvansh — Drama & Film Club",

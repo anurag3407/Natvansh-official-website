@@ -143,7 +143,7 @@ export default function AlumniPage() {
             >
               <div className="max-w-6xl mx-auto relative z-10">
                 <h3 className="text-4xl md:text-5xl font-anton mb-12 text-left text-white border-b-4 border-[var(--neon-cyan)] pb-2 inline-block">
-                  CLASS OF {batch}
+                  CLASS OF {batch.length === 4 ? batch.slice(-2) : batch}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                   {groupedAlumni[batch].map((member) => (

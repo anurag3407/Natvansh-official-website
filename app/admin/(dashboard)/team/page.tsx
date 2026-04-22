@@ -58,16 +58,14 @@ export default function AdminTeamPage() {
 
   const grouped = {
     "Post Bearer": members.filter((m) => m.position === "Post Bearer"),
-    Creative: members.filter((m) => m.position === "Creative"),
-    Technical: members.filter((m) => m.position === "Technical"),
-    Management: members.filter((m) => m.position === "Management"),
+    "Senior Members": members.filter((m) => m.position === "Creative"),
+    "Junior Members": members.filter((m) => m.position === "Management"),
   };
 
   const positionColors: Record<string, string> = {
     "Post Bearer": "var(--neon-yellow)",
-    Creative: "var(--neon-pink)",
-    Technical: "var(--neon-green)",
-    Management: "var(--neon-cyan)",
+    "Senior Members": "var(--neon-pink)",
+    "Junior Members": "var(--neon-cyan)",
   };
 
   return (
@@ -103,7 +101,6 @@ export default function AdminTeamPage() {
               <select className="w-full bg-black border-2 border-zinc-700 text-white px-3 py-2 font-inter focus:border-[var(--neon-yellow)] outline-none" value={editingMember.position} onChange={(e) => setEditingMember({ ...editingMember, position: e.target.value })}>
                 <option value="Post Bearer">Post Bearer</option>
                 <option value="Creative">Creative</option>
-                <option value="Technical">Technical</option>
                 <option value="Management">Management</option>
               </select>
             </div>
