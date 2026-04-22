@@ -77,7 +77,7 @@ export default function RecentEventsSection() {
   return (
     <section
       ref={container}
-      className="section-padding relative overflow-hidden bg-grunge-red halftone-overlay"
+      className="section-padding relative overflow-hidden bg-[url('/images/drama_doodle_3.webp')] bg-cover bg-center     halftone-overlay"
     >
       <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeading
@@ -89,31 +89,31 @@ export default function RecentEventsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 mt-8 sm:mt-12 items-center">
           {/* Image Carousel — Left */}
           <div className="event-carousel p-1.5 sm:p-2 md:p-4 bg-black border-2 md:border-4 border-black shadow-[3px_3px_0px_#FFFF00] sm:shadow-[4px_4px_0px_#FFFF00] md:shadow-[8px_8px_0px_#FFFF00] md:rotate-1">
-              <Swiper
-                effect="coverflow"
-                grabCursor
-                centeredSlides
-                slidesPerView={1}
-                coverflowEffect={{
-                  rotate: 0,
-                  stretch: 0,
-                  depth: 100,
-                  modifier: 1,
-                  slideShadows: false,
-                }}
-                pagination={{ clickable: true }}
-                autoplay={{ delay: 3500, disableOnInteraction: false }}
-                modules={[EffectCoverflow, Pagination, Autoplay]}
-                className="overflow-hidden"
-              >
-                {content ? 
-                  (content.images?.length ? content.images : []).map((img: string, i: number) => (
+            <Swiper
+              effect="coverflow"
+              grabCursor
+              centeredSlides
+              slidesPerView={1}
+              coverflowEffect={{
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: false,
+              }}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 3500, disableOnInteraction: false }}
+              modules={[EffectCoverflow, Pagination, Autoplay]}
+              className="overflow-hidden"
+            >
+              {content ?
+                (content.images?.length ? content.images : []).map((img: string, i: number) => (
                   <SwiperSlide key={i}>
                     <div className="relative aspect-[16/10] overflow-hidden border-2 border-black bg-zinc-950 transition-all duration-300 flex items-center justify-center">
                       <img src={img} alt={`Event photo ${i + 1}`} loading="lazy" className="w-full h-full object-contain" />
                     </div>
                   </SwiperSlide>
-                )) : 
+                )) :
                 placeholderEvent.images.map((img: string, i: number) => (
                   <SwiperSlide key={i}>
                     <div className="relative aspect-[16/10] overflow-hidden border-2 border-black bg-zinc-950 transition-all duration-300 flex items-center justify-center">
@@ -121,7 +121,7 @@ export default function RecentEventsSection() {
                     </div>
                   </SwiperSlide>
                 ))}
-              </Swiper>
+            </Swiper>
           </div>
 
           {/* Event Details — Right */}

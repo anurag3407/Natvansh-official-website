@@ -72,7 +72,7 @@ export default function ClubIntroSection() {
   return (
     <section
       ref={container}
-      className="section-padding relative overflow-hidden bg-grunge-purple halftone-overlay"
+      className="section-padding relative overflow-hidden bg-[url('/images/drama_doodle_2.webp')] bg-cover bg-center halftone-overlay"
     >
       <div className="max-w-6xl mx-auto relative z-10">
         <SectionHeading
@@ -104,7 +104,7 @@ export default function ClubIntroSection() {
           {/* Image Carousel */}
           <div className="intro-carousel-wrapper p-1.5 sm:p-2 md:p-4 bg-[var(--neon-yellow)] border-2 md:border-4 border-black shadow-[4px_4px_0_#000] sm:shadow-[5px_5px_0_#000] md:shadow-[10px_10px_0_#000] md:-rotate-2">
             <div className="border-2 md:border-4 border-black bg-zinc-900 pb-10 sm:pb-12 relative group">
-                <Swiper
+              <Swiper
                 effect="cards"
                 grabCursor={true}
                 modules={[EffectCards, Autoplay, Pagination, Navigation]}
@@ -112,30 +112,30 @@ export default function ClubIntroSection() {
                 pagination={{ clickable: true, dynamicBullets: true }}
                 navigation={{ nextEl: ".intro-next", prevEl: ".intro-prev" }}
                 className="w-full h-auto aspect-[4/3]"
-                >
+              >
                 {images.map((src, i) => (
-                    <SwiperSlide key={i} className="bg-black border-r-4 border-b-4 border-black">
+                  <SwiperSlide key={i} className="bg-black border-r-4 border-b-4 border-black">
                     <img
-                        src={src}
-                        alt={`Club activity ${i + 1}`}
-                        loading="lazy"
-                        className="w-full h-full object-contain transition-all duration-300"
+                      src={src}
+                      alt={`Club activity ${i + 1}`}
+                      loading="lazy"
+                      className="w-full h-full object-contain transition-all duration-300"
                     />
                     {/* Decorative tape on photos */}
-                    <div className="absolute top-[-8px] sm:top-[-10px] left-1/2 -translate-x-1/2 w-16 sm:w-24 h-4 sm:h-6 bg-white border-2 border-black rotate-[-3deg] opacity-80 mix-blend-screen" style={{ boxShadow: "inset 0 0 4px rgba(0,0,0,0.5)"}}></div>
-                    </SwiperSlide>
+                    <div className="absolute top-[-8px] sm:top-[-10px] left-1/2 -translate-x-1/2 w-16 sm:w-24 h-4 sm:h-6 bg-white border-2 border-black rotate-[-3deg] opacity-80 mix-blend-screen" style={{ boxShadow: "inset 0 0 4px rgba(0,0,0,0.5)" }}></div>
+                  </SwiperSlide>
                 ))}
-                </Swiper>
+              </Swiper>
 
-                {/* Custom Navigation Buttons */}
-                <div className="absolute bottom-1.5 sm:bottom-2 left-0 right-0 flex justify-between px-2 sm:px-3 md:px-6 z-20 pointer-events-none">
-                  <button className="intro-prev pointer-events-auto bg-[var(--neon-pink)] text-black border-2 border-black font-anton px-2 py-0.5 sm:px-2 sm:py-1 md:px-4 text-xs sm:text-sm md:text-base tracking-wider shadow-[2px_2px_0_var(--neon-green)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[4px_4px_0_var(--neon-green)] transition-all">
-                    ← PREV
-                  </button>
-                  <button className="intro-next pointer-events-auto bg-[var(--neon-pink)] text-black border-2 border-black font-anton px-2 py-0.5 sm:px-2 sm:py-1 md:px-4 text-xs sm:text-sm md:text-base tracking-wider shadow-[2px_2px_0_var(--neon-green)] hover:-translate-y-1 hover:translate-x-1 hover:shadow-[4px_4px_0_var(--neon-green)] transition-all">
-                    NEXT →
-                  </button>
-                </div>
+              {/* Custom Navigation Buttons */}
+              <div className="absolute bottom-1.5 sm:bottom-2 left-0 right-0 flex justify-between px-2 sm:px-3 md:px-6 z-20 pointer-events-none">
+                <button className="intro-prev pointer-events-auto bg-[var(--neon-pink)] text-black border-2 border-black font-anton px-2 py-0.5 sm:px-2 sm:py-1 md:px-4 text-xs sm:text-sm md:text-base tracking-wider shadow-[2px_2px_0_var(--neon-green)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[4px_4px_0_var(--neon-green)] transition-all">
+                  ← PREV
+                </button>
+                <button className="intro-next pointer-events-auto bg-[var(--neon-pink)] text-black border-2 border-black font-anton px-2 py-0.5 sm:px-2 sm:py-1 md:px-4 text-xs sm:text-sm md:text-base tracking-wider shadow-[2px_2px_0_var(--neon-green)] hover:-translate-y-1 hover:translate-x-1 hover:shadow-[4px_4px_0_var(--neon-green)] transition-all">
+                  NEXT →
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -116,7 +116,7 @@ export default function EventsPage() {
       <Navbar />
       <main ref={container} className="min-h-screen pt-[60px] sm:pt-[10vh] md:pt-[12vh] bg-black">
         {/* Hero Banner */}
-        <section className="section-padding bg-[url('/images/bg_grunge_red.webp')] bg-cover halftone-overlay pb-12 border-b-8 border-white">
+        <section className="section-padding bg-[url('/images/drama_doodle_1.webp')] bg-cover halftone-overlay pb-12 border-b-8 border-white">
           <div className="max-w-6xl mx-auto relative z-10 flex flex-col md:flex-row items-center gap-12">
             <div className="flex-1">
               <SectionHeading
@@ -137,11 +137,10 @@ export default function EventsPage() {
             {categories.map((cat, i) => (
               <button
                 key={cat}
-                className={`px-8 py-3 font-anton uppercase text-xl transition-all duration-300 border-2 border-black transform hover:-translate-y-1 hover:shadow-[4px_4px_0_#000] focus:outline-none ${
-                  i === 0
+                className={`px-8 py-3 font-anton uppercase text-xl transition-all duration-300 border-2 border-black transform hover:-translate-y-1 hover:shadow-[4px_4px_0_#000] focus:outline-none ${i === 0
                     ? "bg-[var(--neon-yellow)] text-black shadow-[4px_4px_0_#000]"
                     : "bg-black text-white hover:bg-[var(--neon-pink)] hover:text-black"
-                }`}
+                  }`}
               >
                 {cat}
               </button>
@@ -156,7 +155,7 @@ export default function EventsPage() {
               const isEven = index % 2 === 0;
               return (
                 <div key={event._id || event.id || index} className="event-alternating-row grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                  
+
                   {/* Image Carousel */}
                   <div className={`p-4 bg-black border-4 border-black shadow-[8px_8px_0px_#FFFF00] rotate-1 ${isEven ? 'lg:order-1 event-anim-left' : 'lg:order-2 event-anim-right'}`}>
                     <Swiper
@@ -182,7 +181,7 @@ export default function EventsPage() {
 
                   {/* Event Details */}
                   <div className={`space-y-6 bg-black p-6 md:p-8 border-4 border-black -rotate-1 relative ${isEven ? 'lg:order-2 shadow-[6px_6px_0px_var(--neon-green)] lg:shadow-[8px_8px_0px_var(--neon-green)] event-anim-right' : 'lg:order-1 shadow-[6px_6px_0px_var(--neon-pink)] lg:shadow-[8px_8px_0px_var(--neon-pink)] event-anim-left'}`}>
-                    
+
                     {event.featured && (
                       <div className="absolute top-0 right-0 p-4 transform translate-x-4 -translate-y-4">
                         <span className="bg-[var(--neon-pink)] text-white text-sm md:text-xl font-anton px-4 py-1 border-2 border-black rotate-[12deg] inline-block shadow-[4px_4px_0_#000]">
@@ -190,9 +189,9 @@ export default function EventsPage() {
                         </span>
                       </div>
                     )}
-                    
+
                     <span className="bg-[var(--neon-yellow)] text-black px-4 py-1 font-anton text-sm uppercase tracking-widest border-2 border-black shadow-[2px_2px_0_#000] inline-block mb-2 transform -rotate-2">
-                       {event.category}
+                      {event.category}
                     </span>
 
                     <h3 className="text-3xl sm:text-4xl md:text-6xl font-anton text-white uppercase leading-none text-stroke-black drop-shadow-[4px_4px_0_#000] hover:text-[var(--neon-yellow)] transition-colors">
@@ -226,7 +225,7 @@ export default function EventsPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                 </div>
               );
             })}

@@ -83,7 +83,7 @@ export default function JoinUsSection() {
   return (
     <section
       ref={container}
-      className="section-padding relative bg-[url('/images/bg_grunge_red.webp')] bg-cover halftone-overlay border-t-8 border-white overflow-hidden"
+      className="section-padding relative bg-[url('/images/drama_doodle_2.webp')] bg-cover halftone-overlay border-t-8 border-white overflow-hidden"
     >
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Heading */}

@@ -94,7 +94,7 @@ export default function ProfessorSection() {
   );
 
   return (
-    <section ref={container} className="section-padding relative bg-grunge-dark halftone-overlay flex flex-col items-center">
+    <section ref={container} className="section-padding relative bg-[url('/images/drama_doodle_4.webp')] bg-cover bg-center     halftone-overlay flex flex-col items-center">
       <div className="w-full max-w-5xl mx-auto relative z-10 px-4">
         <SectionHeading
           accent="GUIDING LIGHT"
@@ -124,11 +124,10 @@ export default function ProfessorSection() {
                     .map((paragraph, index) => (
                       <p
                         key={index}
-                        className={`leading-relaxed font-bold font-inter ${
-                          index === 0
-                            ? "text-base sm:text-lg md:text-xl text-white"
-                            : "text-sm sm:text-base text-[var(--neon-yellow)]"
-                        }`}
+                        className={`leading-relaxed font-bold font-inter ${index === 0
+                          ? "text-base sm:text-lg md:text-xl text-white"
+                          : "text-sm sm:text-base text-[var(--neon-yellow)]"
+                          }`}
                       >
                         &ldquo;{paragraph.trim()}&rdquo;
                       </p>
@@ -148,7 +147,7 @@ export default function ProfessorSection() {
                     />
                     <div className={`absolute top-[-6px] ${i % 2 === 0 ? 'right-[-6px]' : 'left-[-6px]'} w-8 h-3 ${i % 2 === 0 ? "bg-[var(--neon-yellow)]" : "bg-[var(--neon-green)]"} border-2 border-black rotate-12 z-20`}></div>
                   </div>
-                  
+
                   <div className="flex flex-col justify-center text-center sm:text-left h-full mt-1">
                     <p className="font-anton text-lg sm:text-xl tracking-wider text-white uppercase drop-shadow-[2px_2px_0_#000] leading-tight">
                       {prof.name}
@@ -169,7 +168,7 @@ export default function ProfessorSection() {
             </div>
           )}
         </div>
-        
+
         {/* Previous PIS Button */}
         <div className="prof-button flex justify-center mt-12 sm:mt-16 w-full relative z-20">
           <Link href="/professors" className="group relative inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 font-anton tracking-widest uppercase text-black bg-[var(--neon-pink)] border-2 md:border-4 border-black rotate-[-1deg] hover:rotate-[1deg] hover:bg-white transition-all duration-300 shadow-[6px_6px_0_#000] hover:shadow-[2px_2px_0_#000] hover:translate-y-1 hover:translate-x-1">
