@@ -149,7 +149,7 @@ body {
     background: radial-gradient(circle, transparent 20%, #000 20%, #000 80%, transparent 80%, transparent) 0 0 / 4px 4px;
     opacity: 0.3;
     pointer-events: none;
-    z-index: 10;
+    z-index: 0;
   }
 }
 
