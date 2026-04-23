@@ -35,7 +35,7 @@ export async function PUT(
     const professor = await Professor.findByIdAndUpdate(id, body, { new: true });
     if (!professor) return NextResponse.json({ error: "Professor not found" }, { status: 404 });
 
-    await invalidateCacheByPrefix("professors:");
+    invalidateCacheByPrefix("professors:");
 
     return NextResponse.json(professor);
   } catch (error: unknown) {
@@ -58,7 +58,7 @@ export async function DELETE(
     const professor = await Professor.findByIdAndDelete(id);
     if (!professor) return NextResponse.json({ error: "Professor not found" }, { status: 404 });
 
-    await invalidateCacheByPrefix("professors:");
+    invalidateCacheByPrefix("professors:");
 
     return NextResponse.json({ message: "Professor deleted successfully" });
   } catch (error: unknown) {

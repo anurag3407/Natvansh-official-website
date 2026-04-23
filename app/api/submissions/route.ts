@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
 
     const submission = await ContactSubmission.create(body);
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(submission, { status: 201 });
   } catch (error: unknown) {

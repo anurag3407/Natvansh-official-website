@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const event = await Event.create(body);
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(event, { status: 201 });
   } catch (error: unknown) {

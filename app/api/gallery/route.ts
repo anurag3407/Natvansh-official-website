@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const image = await GalleryImage.create(body);
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(image, { status: 201 });
   } catch (error: unknown) {

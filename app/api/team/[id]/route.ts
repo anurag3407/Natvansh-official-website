@@ -37,7 +37,8 @@ export async function PUT(
     const member = await TeamMember.findByIdAndUpdate(id, body, { new: true });
     if (!member) return NextResponse.json({ error: "Member not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    // Fire-and-forget: don't block the response waiting for cache invalidation
+    invalidateCache(CACHE_KEY).catch(() => {});
 
     return NextResponse.json(member);
   } catch (error: unknown) {
@@ -60,7 +61,7 @@ export async function DELETE(
     const member = await TeamMember.findByIdAndDelete(id);
     if (!member) return NextResponse.json({ error: "Member not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY).catch(() => {});
 
     return NextResponse.json({ message: "Member deleted" });
   } catch (error: unknown) {

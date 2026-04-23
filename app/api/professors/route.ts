@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const professor = await Professor.create(body);
 
-    await invalidateCacheByPrefix("professors:");
+    invalidateCacheByPrefix("professors:");
 
     return NextResponse.json(professor, { status: 201 });
   } catch (error: unknown) {

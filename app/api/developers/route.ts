@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const developer = await Developer.create(body);
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(developer, { status: 201 });
   } catch (error: unknown) {

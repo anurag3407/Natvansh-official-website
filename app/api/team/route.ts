@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const member = await TeamMember.create(body);
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(member, { status: 201 });
   } catch (error: unknown) {

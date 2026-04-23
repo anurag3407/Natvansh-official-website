@@ -53,8 +53,8 @@ export async function PUT(
     );
 
     // Invalidate both the specific section cache and the "all content" cache
-    await invalidateCache(`content:${section}`);
-    await invalidateCache("content:all");
+    invalidateCache(`content:${section}`);
+    invalidateCache("content:all");
 
     return NextResponse.json(content);
   } catch (error: unknown) {

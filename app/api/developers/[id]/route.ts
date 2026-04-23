@@ -20,7 +20,7 @@ export async function PUT(
     const developer = await Developer.findByIdAndUpdate(id, body, { new: true });
     if (!developer) return NextResponse.json({ error: "Developer not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(developer);
   } catch (error: unknown) {
@@ -43,7 +43,7 @@ export async function DELETE(
     const developer = await Developer.findByIdAndDelete(id);
     if (!developer) return NextResponse.json({ error: "Developer not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json({ message: "Developer deleted" });
   } catch (error: unknown) {

@@ -20,7 +20,7 @@ export async function PUT(
     const image = await GalleryImage.findByIdAndUpdate(id, body, { new: true });
     if (!image) return NextResponse.json({ error: "Image not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(image);
   } catch (error: unknown) {
@@ -43,7 +43,7 @@ export async function DELETE(
     const image = await GalleryImage.findByIdAndDelete(id);
     if (!image) return NextResponse.json({ error: "Image not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json({ message: "Image deleted" });
   } catch (error: unknown) {

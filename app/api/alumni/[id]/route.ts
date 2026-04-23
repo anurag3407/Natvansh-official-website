@@ -37,7 +37,7 @@ export async function PUT(
     const alumni = await Alumni.findByIdAndUpdate(id, body, { new: true });
     if (!alumni) return NextResponse.json({ error: "Alumni not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(alumni);
   } catch (error: unknown) {
@@ -60,7 +60,7 @@ export async function DELETE(
     const alumni = await Alumni.findByIdAndDelete(id);
     if (!alumni) return NextResponse.json({ error: "Alumni not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json({ message: "Alumni deleted successfully" });
   } catch (error: unknown) {

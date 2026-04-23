@@ -37,7 +37,7 @@ export async function PUT(
     const event = await Event.findByIdAndUpdate(id, body, { new: true });
     if (!event) return NextResponse.json({ error: "Event not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(event);
   } catch (error: unknown) {
@@ -60,7 +60,7 @@ export async function DELETE(
     const event = await Event.findByIdAndDelete(id);
     if (!event) return NextResponse.json({ error: "Event not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json({ message: "Event deleted" });
   } catch (error: unknown) {

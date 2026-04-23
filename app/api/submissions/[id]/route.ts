@@ -20,7 +20,7 @@ export async function PUT(
     const submission = await ContactSubmission.findByIdAndUpdate(id, body, { new: true });
     if (!submission) return NextResponse.json({ error: "Submission not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(submission);
   } catch (error: unknown) {
@@ -43,7 +43,7 @@ export async function DELETE(
     const submission = await ContactSubmission.findByIdAndDelete(id);
     if (!submission) return NextResponse.json({ error: "Submission not found" }, { status: 404 });
 
-    await invalidateCache(CACHE_KEY);
+    invalidateCache(CACHE_KEY);
 
     return NextResponse.json({ message: "Submission deleted" });
   } catch (error: unknown) {
