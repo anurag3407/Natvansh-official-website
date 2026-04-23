@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import SiteContent from "@/lib/models/SiteContent";
-import { cachedFetch, invalidateCache, invalidateCacheByPrefix, CACHE_TTL } from "@/lib/cache";
 
 export async function GET(
   request: NextRequest,
@@ -10,24 +9,14 @@ export async function GET(
 ) {
   try {
     const { section } = await params;
-    const cacheKey = `content:${section}`;
-
-    const content = await cachedFetch(
-      cacheKey,
-      async () => {
-        await dbConnect();
-        return SiteContent.findOne({ section }).lean();
-      },
-      CACHE_TTL.MEDIUM
-    );
+    await dbConnect();
+    const content = await SiteContent.findOne({ section }).lean();
 
     if (!content) {
       return NextResponse.json({ error: "Content not found" }, { status: 404 });
     }
 
-    return NextResponse.json(content, {
-      headers: { "Cache-Control": "s-maxage=600, stale-while-revalidate=1200" },
-    });
+    return NextResponse.json(content);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown error";
     console.error("API error:", message);
@@ -51,10 +40,6 @@ export async function PUT(
       { ...body, section },
       { new: true, upsert: true }
     );
-
-    // Invalidate both the specific section cache and the "all content" cache
-    invalidateCache(`content:${section}`);
-    invalidateCache("content:all");
 
     return NextResponse.json(content);
   } catch (error: unknown) {

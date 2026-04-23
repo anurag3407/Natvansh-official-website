@@ -2,9 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import Event from "@/lib/models/Event";
-import { invalidateCache } from "@/lib/cache";
-
-const CACHE_KEY = "events:all";
 
 export async function GET(
   request: NextRequest,
@@ -37,8 +34,6 @@ export async function PUT(
     const event = await Event.findByIdAndUpdate(id, body, { new: true });
     if (!event) return NextResponse.json({ error: "Event not found" }, { status: 404 });
 
-    invalidateCache(CACHE_KEY);
-
     return NextResponse.json(event);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown error";
@@ -59,8 +54,6 @@ export async function DELETE(
     await dbConnect();
     const event = await Event.findByIdAndDelete(id);
     if (!event) return NextResponse.json({ error: "Event not found" }, { status: 404 });
-
-    invalidateCache(CACHE_KEY);
 
     return NextResponse.json({ message: "Event deleted" });
   } catch (error: unknown) {

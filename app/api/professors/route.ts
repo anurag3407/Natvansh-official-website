@@ -2,28 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import Professor from "@/lib/models/Professor";
-import { cachedFetch, invalidateCacheByPrefix, CACHE_TTL } from "@/lib/cache";
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const current = searchParams.get("current");
 
-    const cacheKey = current === "true" ? "professors:current" : "professors:all";
+    await dbConnect();
+    const query = current === "true" ? { isCurrent: true } : {};
+    const professors = await Professor.find(query).sort({ order: 1 }).lean();
 
-    const professors = await cachedFetch(
-      cacheKey,
-      async () => {
-        await dbConnect();
-        const query = current === "true" ? { isCurrent: true } : {};
-        return Professor.find(query).sort({ order: 1 }).lean();
-      },
-      CACHE_TTL.MEDIUM
-    );
-
-    return NextResponse.json(professors, {
-      headers: { "Cache-Control": "s-maxage=600, stale-while-revalidate=1200" },
-    });
+    return NextResponse.json(professors);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown error";
     console.error("API error:", message);
@@ -39,8 +28,6 @@ export async function POST(request: NextRequest) {
     await dbConnect();
     const body = await request.json();
     const professor = await Professor.create(body);
-
-    invalidateCacheByPrefix("professors:");
 
     return NextResponse.json(professor, { status: 201 });
   } catch (error: unknown) {

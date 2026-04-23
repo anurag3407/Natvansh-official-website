@@ -2,9 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import Developer from "@/lib/models/Developer";
-import { invalidateCache } from "@/lib/cache";
-
-const CACHE_KEY = "developers:all";
 
 export async function PUT(
   request: NextRequest,
@@ -19,8 +16,6 @@ export async function PUT(
     const body = await request.json();
     const developer = await Developer.findByIdAndUpdate(id, body, { new: true });
     if (!developer) return NextResponse.json({ error: "Developer not found" }, { status: 404 });
-
-    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(developer);
   } catch (error: unknown) {
@@ -42,8 +37,6 @@ export async function DELETE(
     await dbConnect();
     const developer = await Developer.findByIdAndDelete(id);
     if (!developer) return NextResponse.json({ error: "Developer not found" }, { status: 404 });
-
-    invalidateCache(CACHE_KEY);
 
     return NextResponse.json({ message: "Developer deleted" });
   } catch (error: unknown) {

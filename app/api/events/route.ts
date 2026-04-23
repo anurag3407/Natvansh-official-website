@@ -2,24 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import Event from "@/lib/models/Event";
-import { cachedFetch, invalidateCache, CACHE_TTL } from "@/lib/cache";
-
-const CACHE_KEY = "events:all";
 
 export async function GET() {
   try {
-    const events = await cachedFetch(
-      CACHE_KEY,
-      async () => {
-        await dbConnect();
-        return Event.find().sort({ createdAt: -1 }).lean();
-      },
-      CACHE_TTL.SHORT
-    );
-
-    return NextResponse.json(events, {
-      headers: { "Cache-Control": "s-maxage=300, stale-while-revalidate=600" },
-    });
+    await dbConnect();
+    const events = await Event.find().sort({ createdAt: -1 }).lean();
+    return NextResponse.json(events);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown error";
     console.error("API error:", message);
@@ -35,8 +23,6 @@ export async function POST(request: NextRequest) {
     await dbConnect();
     const body = await request.json();
     const event = await Event.create(body);
-
-    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(event, { status: 201 });
   } catch (error: unknown) {

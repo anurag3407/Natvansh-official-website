@@ -2,24 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import GalleryImage from "@/lib/models/GalleryImage";
-import { cachedFetch, invalidateCache, CACHE_TTL } from "@/lib/cache";
-
-const CACHE_KEY = "gallery:all";
 
 export async function GET() {
   try {
-    const images = await cachedFetch(
-      CACHE_KEY,
-      async () => {
-        await dbConnect();
-        return GalleryImage.find().sort({ order: 1, createdAt: -1 }).lean();
-      },
-      CACHE_TTL.MEDIUM
-    );
-
-    return NextResponse.json(images, {
-      headers: { "Cache-Control": "s-maxage=600, stale-while-revalidate=1200" },
-    });
+    await dbConnect();
+    const images = await GalleryImage.find().sort({ order: 1, createdAt: -1 }).lean();
+    return NextResponse.json(images);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown error";
     console.error("API error:", message);
@@ -35,8 +23,6 @@ export async function POST(request: NextRequest) {
     await dbConnect();
     const body = await request.json();
     const image = await GalleryImage.create(body);
-
-    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(image, { status: 201 });
   } catch (error: unknown) {

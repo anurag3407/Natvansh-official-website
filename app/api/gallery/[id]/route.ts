@@ -2,9 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import GalleryImage from "@/lib/models/GalleryImage";
-import { invalidateCache } from "@/lib/cache";
-
-const CACHE_KEY = "gallery:all";
 
 export async function PUT(
   request: NextRequest,
@@ -19,8 +16,6 @@ export async function PUT(
     const body = await request.json();
     const image = await GalleryImage.findByIdAndUpdate(id, body, { new: true });
     if (!image) return NextResponse.json({ error: "Image not found" }, { status: 404 });
-
-    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(image);
   } catch (error: unknown) {
@@ -42,8 +37,6 @@ export async function DELETE(
     await dbConnect();
     const image = await GalleryImage.findByIdAndDelete(id);
     if (!image) return NextResponse.json({ error: "Image not found" }, { status: 404 });
-
-    invalidateCache(CACHE_KEY);
 
     return NextResponse.json({ message: "Image deleted" });
   } catch (error: unknown) {

@@ -2,9 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import Alumni from "@/lib/models/Alumni";
-import { invalidateCache } from "@/lib/cache";
-
-const CACHE_KEY = "alumni:all";
 
 export async function GET(
   request: NextRequest,
@@ -37,8 +34,6 @@ export async function PUT(
     const alumni = await Alumni.findByIdAndUpdate(id, body, { new: true });
     if (!alumni) return NextResponse.json({ error: "Alumni not found" }, { status: 404 });
 
-    invalidateCache(CACHE_KEY);
-
     return NextResponse.json(alumni);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown error";
@@ -59,8 +54,6 @@ export async function DELETE(
     await dbConnect();
     const alumni = await Alumni.findByIdAndDelete(id);
     if (!alumni) return NextResponse.json({ error: "Alumni not found" }, { status: 404 });
-
-    invalidateCache(CACHE_KEY);
 
     return NextResponse.json({ message: "Alumni deleted successfully" });
   } catch (error: unknown) {

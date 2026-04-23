@@ -2,23 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import ContactSubmission from "@/lib/models/ContactSubmission";
-import { cachedFetch, invalidateCache, CACHE_TTL } from "@/lib/cache";
-
-const CACHE_KEY = "submissions:all";
 
 export async function GET() {
   try {
     const { userId } = await auth();
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const submissions = await cachedFetch(
-      CACHE_KEY,
-      async () => {
-        await dbConnect();
-        return ContactSubmission.find().sort({ createdAt: -1 }).lean();
-      },
-      CACHE_TTL.SHORT
-    );
+    await dbConnect();
+    const submissions = await ContactSubmission.find().sort({ createdAt: -1 }).lean();
 
     return NextResponse.json(submissions);
   } catch (error: unknown) {
@@ -39,8 +30,6 @@ export async function POST(request: NextRequest) {
     }
 
     const submission = await ContactSubmission.create(body);
-
-    invalidateCache(CACHE_KEY);
 
     return NextResponse.json(submission, { status: 201 });
   } catch (error: unknown) {

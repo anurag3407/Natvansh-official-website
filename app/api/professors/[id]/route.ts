@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import Professor from "@/lib/models/Professor";
-import { invalidateCacheByPrefix } from "@/lib/cache";
 
 export async function GET(
   request: NextRequest,
@@ -35,8 +34,6 @@ export async function PUT(
     const professor = await Professor.findByIdAndUpdate(id, body, { new: true });
     if (!professor) return NextResponse.json({ error: "Professor not found" }, { status: 404 });
 
-    invalidateCacheByPrefix("professors:");
-
     return NextResponse.json(professor);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown error";
@@ -57,8 +54,6 @@ export async function DELETE(
     await dbConnect();
     const professor = await Professor.findByIdAndDelete(id);
     if (!professor) return NextResponse.json({ error: "Professor not found" }, { status: 404 });
-
-    invalidateCacheByPrefix("professors:");
 
     return NextResponse.json({ message: "Professor deleted successfully" });
   } catch (error: unknown) {

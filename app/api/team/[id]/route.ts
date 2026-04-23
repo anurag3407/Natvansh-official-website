@@ -2,9 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/mongodb";
 import TeamMember from "@/lib/models/TeamMember";
-import { invalidateCache } from "@/lib/cache";
-
-const CACHE_KEY = "team:all";
 
 export async function GET(
   request: NextRequest,
@@ -37,9 +34,6 @@ export async function PUT(
     const member = await TeamMember.findByIdAndUpdate(id, body, { new: true });
     if (!member) return NextResponse.json({ error: "Member not found" }, { status: 404 });
 
-    // Fire-and-forget: don't block the response waiting for cache invalidation
-    invalidateCache(CACHE_KEY).catch(() => {});
-
     return NextResponse.json(member);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown error";
@@ -60,8 +54,6 @@ export async function DELETE(
     await dbConnect();
     const member = await TeamMember.findByIdAndDelete(id);
     if (!member) return NextResponse.json({ error: "Member not found" }, { status: 404 });
-
-    invalidateCache(CACHE_KEY).catch(() => {});
 
     return NextResponse.json({ message: "Member deleted" });
   } catch (error: unknown) {
