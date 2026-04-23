@@ -34,8 +34,8 @@ const TeamCard = ({ person }: { person: TeamMember }) => {
     : 'none';
 
   return (
-    <div className="bg-[#050505] rounded-2xl   overflow-hidden border border-zinc-900 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(255,100,50,0.3)] flex flex-col h-full mx-auto w-full max-w-[320px]">
-      <div className="relative h-60 w-full bg-[url('/images/bg-doodle-dark.webp')] opzcity-90 bg-cover bg-center overflow-hidden flex items-end justify-center">
+    <div className="bg-gradient-to-br from-zinc-900 via-[#050505] to-black rounded-2xl overflow-hidden border border-zinc-800/80 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(255,100,50,0.3)] flex flex-col h-full mx-auto w-full max-w-[320px]">
+      <div className="relative h-60 w-full bg-[url('/images/bg-doodle-dark.webp')] opacity-90 bg-cover bg-center overflow-hidden flex items-end justify-center">
         <div className="absolute inset-0 bg-black/10 mix-blend-multiply rounded-t-[1.5rem]"></div>
         <img
           src={person.image || fallbackImage}
