@@ -23,6 +23,7 @@ interface TeamMember {
   imageTransform?: { x: number; y: number; scale: number };
   socialLinks: { instagram?: string; linkedin?: string; email?: string };
   year: string;
+  campus?: "Patna" | "Bihta";
   order: number;
 }
 
@@ -33,8 +34,8 @@ const TeamCard = ({ person }: { person: TeamMember }) => {
     : 'none';
 
   return (
-    <div className="bg-[#050505] rounded-[1.5rem] overflow-hidden border border-zinc-900 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(255,100,50,0.3)] flex flex-col h-full mx-auto w-full max-w-[320px]">
-      <div className="relative h-60 w-full bg-[url('/images/card_doodle_bg.webp')] bg-cover bg-center overflow-hidden flex items-end justify-center">
+    <div className="bg-[#050505] rounded-2xl   overflow-hidden border border-zinc-900 group transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(255,100,50,0.3)] flex flex-col h-full mx-auto w-full max-w-[320px]">
+      <div className="relative h-60 w-full bg-[url('/images/bg-doodle-dark.webp')] opzcity-90 bg-cover bg-center overflow-hidden flex items-end justify-center">
         <div className="absolute inset-0 bg-black/10 mix-blend-multiply rounded-t-[1.5rem]"></div>
         <img
           src={person.image || fallbackImage}
@@ -44,34 +45,45 @@ const TeamCard = ({ person }: { person: TeamMember }) => {
           style={{ transform: transformStyle }}
         />
       </div>
-    <div className="p-6 flex flex-col flex-1 items-start justify-between text-left gap-8">
-      <div>
-        <h4 className="font-inter font-bold text-2xl text-white tracking-tight leading-tight">
-          {person.name}
-        </h4>
-        <p className="text-sm font-medium text-zinc-400 mt-1">{person.role}</p>
-        {person.year && (
-          <p className="text-sm text-zinc-300 font-medium tracking-wider mt-6">Batch {person.year}</p>
-        )}
+      <div className="p-6 flex flex-col flex-1 items-start justify-between text-left gap-8">
+        <div>
+          <h4 className="font-inter font-bold text-2xl text-white tracking-tight leading-tight">
+            {person.name}
+          </h4>
+          <p className="text-sm font-medium text-zinc-400 mt-1">{person.role}</p>
+          <div className="flex items-center gap-3 mt-6">
+            {person.year && (
+              <p className="text-sm text-zinc-300 font-medium tracking-wider">Batch {person.year}</p>
+            )}
+            {person.campus && (
+              <span className={`px-2 py-0.5 text-[10px] font-bold tracking-widest rounded uppercase border ${
+                person.campus === 'Patna' 
+                  ? 'text-[#FF6432] bg-[#FF6432]/10 border-[#FF6432]/20' 
+                  : 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20'
+              }`}>
+                {person.campus}
+              </span>
+            )}
+          </div>
+        </div>
+        <div className="flex items-center gap-6 w-full justify-start mt-2">
+          {person.socialLinks?.instagram && (
+            <a href={person.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white transition-colors"><IconInstagram size={22} /></a>
+          )}
+          {person.socialLinks?.linkedin && (
+            <a href={person.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white transition-colors"><IconLinkedin size={20} /></a>
+          )}
+          {person.socialLinks?.email && (
+            <a href={`mailto:${person.socialLinks.email}`} className="text-zinc-300 hover:text-white transition-colors"><IconWhatsapp size={22} /></a>
+          )}
+          {!person.socialLinks?.instagram && !person.socialLinks?.linkedin && !person.socialLinks?.email && (
+            <>
+              <span className="text-zinc-300"><IconInstagram size={22} /></span>
+              <span className="text-zinc-300"><IconLinkedin size={20} /></span>
+            </>
+          )}
+        </div>
       </div>
-      <div className="flex items-center gap-6 w-full justify-start mt-2">
-        {person.socialLinks?.instagram && (
-          <a href={person.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white transition-colors"><IconInstagram size={22} /></a>
-        )}
-        {person.socialLinks?.linkedin && (
-          <a href={person.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white transition-colors"><IconLinkedin size={20} /></a>
-        )}
-        {person.socialLinks?.email && (
-          <a href={`mailto:${person.socialLinks.email}`} className="text-zinc-300 hover:text-white transition-colors"><IconWhatsapp size={22} /></a>
-        )}
-        {!person.socialLinks?.instagram && !person.socialLinks?.linkedin && !person.socialLinks?.email && (
-          <>
-            <span className="text-zinc-300"><IconInstagram size={22} /></span>
-            <span className="text-zinc-300"><IconLinkedin size={20} /></span>
-          </>
-        )}
-      </div>
-    </div>
     </div>
   );
 };
