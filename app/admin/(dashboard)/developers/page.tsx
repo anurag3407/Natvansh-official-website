@@ -26,6 +26,7 @@ export default function AdminDevelopersPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingDev, setEditingDev] = useState<DevData>(emptyDev);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => { fetchDevs(); }, []);
 
@@ -38,12 +39,15 @@ export default function AdminDevelopersPage() {
   }
 
   async function handleSave() {
+    if (isSaving) return;
+    setIsSaving(true);
     try {
       const url = editingDev._id ? `/api/developers/${editingDev._id}` : "/api/developers";
       const method = editingDev._id ? "PUT" : "POST";
       const res = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(editingDev) });
       if (res.ok) { await fetchDevs(); setIsEditing(false); setEditingDev(emptyDev); }
     } catch (e) { console.error(e); }
+    finally { setIsSaving(false); }
   }
 
   async function handleDelete(id: string) {
@@ -142,7 +146,7 @@ export default function AdminDevelopersPage() {
 
           <div className="flex justify-end gap-2">
             <button className="px-4 py-2 font-anton text-sm uppercase text-zinc-400 border-2 border-zinc-700 hover:bg-zinc-800 transition-colors" onClick={() => setIsEditing(false)}>Cancel</button>
-            <button className="px-4 py-2 font-anton text-sm uppercase bg-[var(--neon-green)] text-black border-2 border-black shadow-[4px_4px_0_#000] hover:-translate-y-1 transition-transform flex items-center gap-2" onClick={handleSave}><Save size={14} /> Save</button>
+            <button className="px-4 py-2 font-anton text-sm uppercase bg-[var(--neon-green)] text-black border-2 border-black shadow-[4px_4px_0_#000] hover:-translate-y-1 transition-transform flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" onClick={handleSave} disabled={isSaving}><Save size={14} /> {isSaving ? "Saving..." : "Save"}</button>
           </div>
         </div>
       )}
