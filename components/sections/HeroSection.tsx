@@ -79,7 +79,7 @@ export default function HeroSection() {
   return (
     <section
       ref={container}
-      className="relative min-h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden bg-zinc-950 bg-[url('/images/home_bg_mobile.webp')] sm:bg-[url('/images/home_bg_1.webp')] bg-cover bg-center"
+      className="relative min-h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden bg-zinc-950 bg-[url('/images/bg_grunge_red.webp')] sm:bg-[url('/images/home_bg_1.webp')] bg-cover bg-center"
     >
       {/* Overlays for depth */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70 pointer-events-none z-[1]"></div>
@@ -92,9 +92,9 @@ export default function HeroSection() {
 
         {/* Notice Banner */}
         {notice && (
-          <div className="hero-notice w-full max-w-[90%] sm:max-w-2xl mb-5 sm:mb-8 bg-[var(--neon-yellow)] border-3 border-black p-2 sm:p-2.5 shadow-[4px_4px_0_#000] sm:shadow-[5px_5px_0_#000] transform -rotate-1 flex items-center justify-center text-center gap-2">
+          <div className="hero-notice w-[90%] sm:max-w-2xl mb-6 sm:mb-8 bg-[var(--neon-yellow)] border-2 sm:border-3 border-black p-1.5 sm:p-2.5 shadow-[4px_4px_0_#000] sm:shadow-[5px_5px_0_#000] transform -rotate-1 flex items-center justify-center text-center gap-1 sm:gap-2">
             <Megaphone size={14} className="text-black shrink-0 animate-pulse sm:w-4 sm:h-4" />
-            <span className="font-anton text-[10px] sm:text-sm md:text-base text-black uppercase tracking-widest">
+            <span className="font-anton text-[10px] sm:text-sm md:text-base text-black uppercase tracking-widest leading-tight">
               {notice}
             </span>
             <Megaphone size={16} className="text-black shrink-0 animate-pulse hidden sm:block" />
@@ -102,7 +102,7 @@ export default function HeroSection() {
         )}
 
         {/* Sanskrit Badge */}
-        <div className="hero-badge flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-5 sm:py-2 border-2 sm:border-3 border-black bg-[var(--neon-cyan)] mb-5 sm:mb-8 shadow-[3px_3px_0_#000] sm:shadow-[4px_4px_0_#000] rotate-[-2deg] hover:rotate-[2deg] transition-transform duration-300 cursor-default">
+        <div className="hero-badge flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-5 sm:py-2 border-2 sm:border-3 border-black bg-[var(--neon-cyan)] mb-8 sm:mb-10 shadow-[3px_3px_0_#000] sm:shadow-[4px_4px_0_#000] rotate-[-2deg] hover:rotate-[2deg] transition-transform duration-300 cursor-default">
           <Sparkles size={12} className="text-black sm:w-3.5 sm:h-3.5" />
           <span className="font-anton tracking-[0.15em] sm:tracking-[0.2em] text-black uppercase text-[10px] sm:text-sm">
             अस्ति कश्चित् विशेषः!
@@ -113,7 +113,7 @@ export default function HeroSection() {
         {/* ===== NATVANSH TITLE ===== */}
         <h1
           ref={titleRef}
-          className="flex flex-nowrap justify-center items-baseline mb-2 sm:mb-4 relative z-10 w-full"
+          className="flex flex-nowrap justify-center items-baseline mb-4 sm:mb-6 relative z-10 w-full"
           style={{ transform: "rotate(-1.5deg)" }}
         >
           {LETTERS.map((letter, i) => (
@@ -121,16 +121,16 @@ export default function HeroSection() {
               key={i}
               className="hero-char inline-block font-anton leading-none cursor-default select-none hover:scale-110 transition-transform duration-200"
               style={{
-                fontSize: "clamp(2.5rem, 11vw, 180px)",
+                fontSize: "clamp(3rem, 20vw, 180px)",
                 color: letter.color,
-                WebkitTextStroke: "min(3px, 0.5vw) #000",
+                WebkitTextStroke: "min(2px, 0.4vw) #000",
                 textShadow: `
-                  min(6px, 1.5vw) min(6px, 1.5vw) 0px #000,
-                  min(10px, 2vw) min(10px, 2vw) 0px rgba(0,0,0,0.3)
+                  min(4px, 1vw) min(4px, 1vw) 0px #000,
+                  min(6px, 1.5vw) min(6px, 1.5vw) 0px rgba(0,0,0,0.3)
                 `,
                 transform: `rotate(${letter.rotate}deg) translateY(${letter.y}px)`,
                 zIndex: 20 - i,
-                marginLeft: i === 0 ? "0" : "-0.04em",
+                marginLeft: i === 0 ? "0" : "-0.01em",
               }}
             >
               {letter.char}
@@ -140,7 +140,7 @@ export default function HeroSection() {
 
         {/* Subtitle Tag */}
         <div
-          className="hero-subtitle-tag bg-black px-4 py-1.5 sm:px-8 sm:py-2 border-2 sm:border-3 border-black mb-5 sm:mb-7 shadow-[3px_3px_0_var(--neon-pink)] sm:shadow-[4px_4px_0_var(--neon-pink)] rotate-[1.5deg] hover:rotate-0 transition-transform duration-300"
+          className="hero-subtitle-tag bg-black px-4 py-1.5 sm:px-8 sm:py-2 border-2 sm:border-3 border-black mb-8 sm:mb-10 shadow-[3px_3px_0_var(--neon-pink)] sm:shadow-[4px_4px_0_var(--neon-pink)] rotate-[1.5deg] hover:rotate-0 transition-transform duration-300"
         >
           <span className="font-anton text-[var(--neon-yellow)] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-sm sm:text-xl md:text-2xl lg:text-3xl">
             Drama & Film Club
@@ -148,7 +148,7 @@ export default function HeroSection() {
         </div>
 
         {/* Tagline */}
-        <div className="hero-tagline bg-black/80 backdrop-blur-sm border-2 border-white/20 p-3 sm:p-4 max-w-md w-full text-center mb-8 sm:mb-10 mx-auto transform -rotate-1 relative">
+        <div className="hero-tagline bg-black/80 backdrop-blur-sm border-2 border-white/20 p-3 sm:p-4 max-w-md w-[90%] sm:w-full text-center mb-10 sm:mb-12 mx-auto transform -rotate-1 relative">
           {/* Corner accent */}
           <div className="absolute -top-2 -left-2 w-4 h-4 bg-[var(--neon-pink)] border-2 border-black"></div>
           <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-[var(--neon-cyan)] border-2 border-black"></div>
@@ -166,16 +166,16 @@ export default function HeroSection() {
         </div>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 w-[90%] sm:w-auto mt-2 sm:mt-0">
           <a
             href="/events"
-            className="hero-cta group w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 font-anton text-sm sm:text-base md:text-xl text-black bg-[var(--neon-yellow)] border-3 border-black shadow-[6px_6px_0_#000] rotate-[-2deg] hover:rotate-0 hover:shadow-[2px_2px_0_#000] hover:translate-x-1 hover:translate-y-1 transition-all duration-200 text-center uppercase tracking-wider"
+            className="hero-cta group w-full sm:w-auto px-5 py-2.5 sm:px-8 sm:py-4 md:px-10 md:py-4 font-anton text-sm sm:text-base md:text-xl text-black bg-[var(--neon-yellow)] border-2 sm:border-3 border-black shadow-[4px_4px_0_#000] sm:shadow-[6px_6px_0_#000] rotate-[-2deg] hover:rotate-0 hover:shadow-[2px_2px_0_#000] hover:translate-x-1 hover:translate-y-1 transition-all duration-200 text-center uppercase tracking-wider"
           >
             🎬 Explore The Magic
           </a>
           <a
             href="/team"
-            className="hero-cta group w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 font-anton text-sm sm:text-base md:text-xl text-white bg-transparent border-3 border-white shadow-[6px_6px_0_var(--neon-cyan)] rotate-[2deg] hover:rotate-0 hover:bg-[var(--neon-pink)] hover:text-black hover:border-black hover:shadow-[2px_2px_0_#000] hover:translate-x-1 hover:translate-y-1 transition-all duration-200 text-center uppercase tracking-wider"
+            className="hero-cta group w-full sm:w-auto px-5 py-2.5 sm:px-8 sm:py-4 md:px-10 md:py-4 font-anton text-sm sm:text-base md:text-xl text-white bg-transparent border-2 sm:border-3 border-white shadow-[4px_4px_0_var(--neon-cyan)] sm:shadow-[6px_6px_0_var(--neon-cyan)] rotate-[2deg] hover:rotate-0 hover:bg-[var(--neon-pink)] hover:text-black hover:border-black hover:shadow-[2px_2px_0_#000] hover:translate-x-1 hover:translate-y-1 transition-all duration-200 text-center uppercase tracking-wider"
           >
             🎭 Meet The Cast
           </a>
